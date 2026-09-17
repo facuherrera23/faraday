@@ -71,3 +71,7 @@ __pycache__/
 /survey.txt
 /COTIZACION.md
 /_fill_*.py
+.vercel
+
+# Android signing secrets (keystore + credentials) — NEVER commit
+.pwa-signing/

@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.vercel.faraday_energy_landing.twa",
+    "sha256_cert_fingerprints": ["53:88:D6:FD:8D:B8:AD:7F:0C:72:92:25:88:BC:F5:43:50:D1:86:5E:01:0C:6E:51:CB:D6:0F:AB:08:BB:14:2E"]
+  }
+}]

@@ -1,11 +1,11 @@
 /* FARADAY ENERGY - Service Worker */
-var VERSION = 'v4';
+var VERSION = 'v5';
 var CACHE_PRE = 'faraday-precache-' + VERSION;
 var CACHE_RUNTIME = 'faraday-runtime-' + VERSION;
 var CACHES = [CACHE_PRE, CACHE_RUNTIME];
 
 var PRE_CACHE = [
-  '/', '/index.html',
+  '/', '/index.html', '/admin.html', '/admin.webmanifest',
   '/en/index.html', '/en/quienes-somos.html', '/en/servicios.html', '/en/contacto.html',
   '/pages/quienes-somos.html', '/pages/servicios.html', '/pages/clientes.html',
   '/pages/casos-exito.html', '/pages/blog.html', '/pages/contacto.html', '/pages/gracias.html',
@@ -17,7 +17,7 @@ var PRE_CACHE = [
   '/css/tokens.css', '/css/base.css', '/css/layout.css', '/css/components.css', '/css/motion.css',
   '/js/main.js', '/js/reveal.js', '/js/nav.js', '/js/supabase-config.js', '/js/quote-wizard.js',
   '/js/analytics.js', '/js/sentry-init.js', '/js/push.js', '/js/admin.js', '/js/hero-lightning.js',
-  '/assets/img/favicon.png'
+  '/assets/img/favicon.png', '/assets/img/icon-192.png', '/assets/img/icon-512.png'
 ];
 
 self.addEventListener('install', function (e) {

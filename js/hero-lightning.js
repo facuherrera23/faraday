@@ -3,7 +3,7 @@
 
   var container = document.getElementById('hero-bolt');
   if (!container) return;
-  if (window.matchMedia('(max-width: 1023px)').matches) return;
+  if (container.dataset.mobile !== 'true' && window.matchMedia('(max-width: 1023px)').matches) return;
 
   var scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x03050a, 0.012);

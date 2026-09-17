@@ -26,6 +26,7 @@
     .admin-login::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(var(--gray-500) 1px, transparent 1px), linear-gradient(90deg, var(--gray-500) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
     .admin-login-card { position: relative; z-index: 2; width: 100%; max-width: 420px; }
     .login-bolt { width: 100%; max-width: 480px; height: clamp(180px, 34vh, 320px); margin-bottom: clamp(0.5rem, 2.5vh, 1.75rem); pointer-events: none; position: relative; z-index: 2; }
+    #hero-bolt.login-bolt { display: block; }
     .login-bolt canvas { display: block; }
     .admin-login-logo { font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; letter-spacing: -0.03em; color: var(--white); }
     .admin-login-logo span { color: var(--gold); }
@@ -216,13 +217,13 @@
 <script>
 (function () {
   var deps = [
-    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js',
-    'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js',
+    'js/vendor/three/three.min.js',
+    'js/vendor/three/EffectComposer.js',
+    'js/vendor/three/RenderPass.js',
+    'js/vendor/three/ShaderPass.js',
+    'js/vendor/three/CopyShader.js',
+    'js/vendor/three/LuminosityHighPassShader.js',
+    'js/vendor/three/UnrealBloomPass.js',
     'js/hero-lightning.js'
   ];
   function next() {

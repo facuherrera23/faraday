@@ -15,7 +15,13 @@
   window.SUPABASE_CONFIG = {
     url: 'https://uvkmmlmeumrownidhfqu.supabase.co',
     anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a21tbG1ldW1yb3duaWRoZnF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3NTAyMDcsImV4cCI6MjEwNDMyNjIwN30.Qs-KLjT_r-BInOUrTaEzzEY4Ge6nJ6bkxOM1CJu4eqk',
-    table: 'contact_submissions'
+    table: 'contact_submissions',
+    /*
+     * Web Push (VAPID). La publica viaja al navegador; la PRIVADA vive SOLO
+     * como secret de la Edge Function send-push en Supabase (VAPID_PRIVATE_KEY).
+     * Generadas con: npx web-push generate-vapid-keys
+     */
+    vapidPublicKey: 'BIKsum_eQdwtSSyWtPrQeEZxT6UvRlVhc1S0Twdg426Y8D6fCU2fGjWOO__DlEaxCRu42o7lfFW0mmSQh6Flj64'
   };
 
   window.SUPABASE_READY = function () {

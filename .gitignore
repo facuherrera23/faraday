@@ -75,3 +75,6 @@ __pycache__/
 
 # Android signing secrets (keystore + credentials) — NEVER commit
 .pwa-signing/
+
+# Supabase CLI temp artifacts
+supabase/.temp/

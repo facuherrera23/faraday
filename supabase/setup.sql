@@ -202,3 +202,28 @@ CREATE POLICY t_staff_all
 --   - Project URL   → window.SUPABASE_URL en js/supabase-config.js
 --   - anon/public key → window.SUPABASE_ANON_KEY en js/supabase-config.js
 -- =====================================================================
+
+-- ===== 8. WEB PUSH (notificaciones del panel admin) =====
+-- (Tambien disponible como supabase/push-subscriptions.sql)
+
+CREATE TABLE IF NOT EXISTS public.push_subscriptions (
+  id           uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id      uuid NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
+  endpoint     text NOT NULL UNIQUE,
+  subscription jsonb NOT NULL,
+  created_at   timestamptz NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.push_subscriptions ENABLE ROW LEVEL SECURITY;
+
+-- Cada usuario gestiona SOLO sus propias suscripciones.
+DROP POLICY IF EXISTS ps_self_all ON public.push_subscriptions;
+CREATE POLICY ps_self_all
+  ON public.push_subscriptions
+  FOR ALL
+  TO authenticated
+  USING (user_id = auth.uid())
+  WITH CHECK (user_id = auth.uid());
+
+-- Las Edge Functions leen todas las suscripciones con service_role
+-- (bypasea RLS); no hacen falta mas politicas.

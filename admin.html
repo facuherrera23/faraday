@@ -106,6 +106,7 @@
     <div class="brand">FARADAY <span>ADMIN</span></div>
     <div style="display:flex;gap:0.75rem;align-items:center">
       <span id="current-user" style="font-family:var(--font-mono);font-size:0.55rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em"></span>
+      <button type="button" id="btn-push" class="btn-estado" style="display:none">ACTIVAR NOTIFICACIONES</button>
       <button type="button" id="btn-logout" class="btn-estado">SALIR</button>
       <button type="button" id="btn-refresh" class="btn-estado">ACTUALIZAR</button>
     </div>
@@ -206,6 +207,7 @@
   </style>
   <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(function(){});}</script>
 <script src="js/supabase-config.js"></script>
+<script src="js/push.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/admin.js"></script>
 </body>

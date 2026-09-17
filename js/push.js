@@ -1,45 +1,67 @@
-/* FARADAY ENERGY - Web Push subscription del panel admin
-   Se activa solo cuando el usuario logueado es super_admin y hay VAPID config */
-
+/* FARADAY ENERGY - Web Push del panel admin */
 (function () {
   'use strict';
 
-  var pushScript = document.createElement('script');
-  pushScript.src = 'js/push.js'; // opcional, load-bajo demanda
-  pushScript.async = true;
-  document.head.appendChild(pushScript);
+  var VAPID = (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.vapidPublicKey) || '';
+
+  function vapidToBytes(b64) {
+    var padding = '='.repeat((4 - b64.length % 4) % 4);
+    var base64 = (b64 + padding).replace(/-/g, '+').replace(/_/g, '/');
+    var raw = atob(base64);
+    var arr = new Uint8Array(raw.length);
+    for (var i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
+    return arr;
+  }
 
   window.FaradayPush = {
-    pushSupported: ('serviceWorker' in navigator) && ('PushManager' in window),
+    supported: ('serviceWorker' in navigator) && ('PushManager' in window) && ('Notification' in window) && !!VAPID,
 
-    init: function (vapidKey) {
-      if (!vapidKey || vapidKey.indexOf('B') !== 0) return Promise.resolve(null);
-      if (!this.pushSupported) return Promise.resolve(null);
-      return navigator.serviceWorker.ready.then(function (reg) {
-        return reg.pushManager.subscribe({
-          userVisibleOnly: true,
-          applicationServerKey: new Uint8Array(vapidToUint8(vapidKey))
+    enable: function (db, userId) {
+      if (!this.supported || !db || !userId) return Promise.resolve(false);
+      return Notification.requestPermission().then(function (perm) {
+        if (perm !== 'granted') return false;
+        return navigator.serviceWorker.ready.then(function (reg) {
+          return reg.pushManager.getSubscription().then(function (existing) {
+            return existing || reg.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: vapidToBytes(VAPID)
+            });
+          });
+        }).then(function (sub) {
+          return db.from('push_subscriptions').upsert({
+            user_id: userId,
+            endpoint: sub.endpoint,
+            subscription: sub
+          }, { onConflict: 'endpoint' }).then(function (r) {
+            if (r && r.error) throw r.error;
+            return true;
+          });
         });
-      }).then(function (sub) {
-        if (window.__db && window.__currentUser) {
-          return window.__db.from('push_subscriptions').upsert({
-            user_id: window.__currentUser,
-            subscription: JSON.stringify(sub)
-          }).then(function () { return sub; });
-        }
-        return sub;
-      });
+      }).catch(function () { return false; });
     },
 
-    vapidToUint8: function (base64String) {
-      var padding = '='.repeat((4 - base64String.length % 4) % 4);
-      var base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-      var raw = atob(base64);
-      var arr = new Uint8Array(raw.length);
-      for (var i = 0; i < raw.length; i++) arr[i] = raw.charCodeAt(i);
-      return arr;
+    refresh: function (btn) {
+      if (!btn) return;
+      if (!this.supported) { btn.style.display = 'none'; return; }
+      if (Notification.permission === 'denied') {
+        btn.textContent = 'NOTIFICACIONES BLOQUEADAS';
+        btn.dataset.state = 'denied';
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        navigator.serviceWorker.ready.then(function (reg) {
+          return reg.pushManager.getSubscription();
+        }).then(function (sub) {
+          btn.textContent = sub ? 'NOTIFICACIONES ON' : 'ACTIVAR NOTIFICACIONES';
+          btn.dataset.state = sub ? 'on' : 'off';
+        }).catch(function () {
+          btn.textContent = 'ACTIVAR NOTIFICACIONES';
+          btn.dataset.state = 'off';
+        });
+        return;
+      }
+      btn.textContent = 'ACTIVAR NOTIFICACIONES';
+      btn.dataset.state = 'off';
     }
   };
-
-  function vapidToUint8(s) { return window.FaradayPush.vapidToUint8(s); }
 })();

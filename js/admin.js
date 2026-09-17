@@ -94,10 +94,33 @@
     currentUserEmail = email;
     currentUserId = uid;
     showView('main');
+    setupPush();
     $('current-user').textContent = (email || '').split('@')[0].toUpperCase() + ' (' + role + ')';
     $('tab-equipo').style.display = role === 'super_admin' ? 'block' : 'none';
     applyFilter();
     subscribeRealtime();
+  }
+
+  /* ================= PUSH NOTIFICATIONS ================= */
+  function setupPush() {
+    var btn = document.getElementById('btn-push');
+    var api = window.FaradayPush;
+    if (!btn || DEMO || !api || !api.supported) {
+      if (btn) btn.style.display = 'none';
+      return;
+    }
+    btn.style.display = '';
+    api.refresh(btn);
+    btn.onclick = function () {
+      if (btn.dataset.state === 'denied') return;
+      btn.textContent = 'ACTIVANDO...';
+      api.enable(db, currentUserId).then(function () { api.refresh(btn); });
+    };
+  }
+
+  function hidePush() {
+    var btn = document.getElementById('btn-push');
+    if (btn) btn.style.display = 'none';
   }
 
   /* ================= DATA LOAD ================= */
@@ -541,6 +564,7 @@
   function onLogout() {
     currentRole = null; currentUserEmail = null; currentUserId = null;
     leadsCache = []; teamCache = [];
+    hidePush();
     if (!DEMO) db.auth.signOut();
     showView('login');
   }

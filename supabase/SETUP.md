@@ -129,6 +129,21 @@ https://TU-DOMINIO/admin.html
 
 ---
 
+## Paso 8 — Notificaciones push del panel (opcional, 5 minutos)
+
+El botón **ACTIVAR NOTIFICACIONES** (topbar del panel) ya está en el código. Para que llegue una notificación al celular cuando entra una consulta nueva, hay que hacer 3 pasos en Supabase:
+
+1. **Crear la tabla** — si ya corriste `setup.sql` antes de que existiera esta sección, abrí **SQL Editor > New query** y pegá TODO el contenido de `supabase/push-subscriptions.sql` (crea la tabla `push_subscriptions` donde se guardan los teléfonos/navegadores suscriptos).
+2. **Deploy de la función `send-push`** — **Edge Functions > New function**, nombre `send-push`, pegá el contenido de `supabase/functions/send-push/index.ts` y deploy. Después en pestaña **Secrets** agregá:
+   - `VAPID_PUBLIC_KEY` = `BIKsum_eQdwtSSyWtPrQeEZxT6UvRlVhc1S0Twdg426Y8D6fCU2fGjWOO__DlEaxCRu42o7lfFW0mmSQh6Flj64`
+   - `VAPID_PRIVATE_KEY` = la clave privada que está en `.pwa-signing/vapid-keys.txt` (secreto, nunca se sube al repo)
+   - `VAPID_SUBJECT` = `mailto:noelia@faradayenergy.com`
+3. **Webhook de aviso** — **Database > Webhooks > Add**: tabla `contact_submissions`, evento `INSERT`, URL `https://TU-PROYECTO.supabase.co/functions/v1/send-push`, headers `Content-Type: application/json` + `Authorization: Bearer <tu anon key de Settings > API>`.
+
+Y cada admin activa desde el panel: click en **ACTIVAR NOTIFICACIONES** → permitir en el navegador → queda en "NOTIFICACIONES ON". Cuando un cliente envíe un formulario, llega la notificación al celular.
+
+---
+
 ## Quién tiene qué permiso
 
 | Rol | Ver consultas | Cambiar estado de consulta | Ver/gestionar equipo | Borrar consultas |
@@ -159,6 +174,11 @@ admin_profiles
 ├── nombre
 ├── role (pending / admin / super_admin)
 └── created_at
+
+push_subscriptions   (solo si configuraste el Paso 8)
+├── user_id (a qué usuario pertenece)
+├── endpoint (identificador único del navegador suscripto)
+└── subscription (payload completo para enviar la notificación)
 ```
 
 ---

@@ -1,5 +1,5 @@
 /* FARADAY ENERGY - Service Worker */
-var VERSION = 'v5';
+var VERSION = 'v6';
 var CACHE_PRE = 'faraday-precache-' + VERSION;
 var CACHE_RUNTIME = 'faraday-runtime-' + VERSION;
 var CACHES = [CACHE_PRE, CACHE_RUNTIME];
@@ -37,6 +37,35 @@ self.addEventListener('activate', function (e) {
         if (CACHES.indexOf(k) === -1) return caches.delete(k);
       }));
     }).then(function () { return self.clients.claim(); })
+  );
+});
+
+self.addEventListener('push', function (e) {
+  var data = {};
+  try { data = e.data ? e.data.json() : {}; } catch (err) { data = {}; }
+  var title = data.title || 'FARADAY ENERGY';
+  var opts = {
+    body: data.body || '',
+    icon: data.icon || '/assets/img/icon-192.png',
+    badge: data.badge || '/assets/img/icon-192.png',
+    tag: data.tag || 'faraday',
+    data: { url: data.url || '/admin.html' }
+  };
+  e.waitUntil(self.registration.showNotification(title, opts));
+});
+
+self.addEventListener('notificationclick', function (e) {
+  e.notification.close();
+  var target = (e.notification.data && e.notification.data.url) || '/admin.html';
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        var p;
+        try { p = new URL(list[i].url).pathname; } catch (err) { continue; }
+        if (p === target) return list[i].focus();
+      }
+      return self.clients.openWindow(target);
+    })
   );
 });
 

@@ -109,6 +109,7 @@
     return;
   }
 
+  var mobileLogin = container.dataset.mobile === 'true';
   var visible = true;
   var clock = new THREE.Clock();
 
@@ -125,8 +126,13 @@
     var t = clock.getElapsedTime();
     currentMouseX += (targetMouseX - currentMouseX) * 0.05;
     currentMouseY += (targetMouseY - currentMouseY) * 0.05;
-    masterGroup.rotation.y = t * 0.35 + currentMouseX * 0.8;
-    masterGroup.rotation.x = Math.sin(t * 0.5) * 0.15 - currentMouseY * 0.6;
+    if (mobileLogin) {
+      masterGroup.rotation.y = Math.sin(t * 0.6) * 0.55 + currentMouseX * 0.5;
+      masterGroup.rotation.x = Math.sin(t * 0.5) * 0.12 - currentMouseY * 0.4;
+    } else {
+      masterGroup.rotation.y = t * 0.35 + currentMouseX * 0.8;
+      masterGroup.rotation.x = Math.sin(t * 0.5) * 0.15 - currentMouseY * 0.6;
+    }
     var pulse = Math.sin(t * 8) * 0.3 + 1.2;
     rayoMat.emissiveIntensity = 0.5 * pulse;
     coreLight.intensity = 4 * pulse;

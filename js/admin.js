@@ -75,6 +75,7 @@
 
   var DEMO_USERS = [
     { user_id: 'u1', email: 'noelia@faradayenergy.com', nombre: 'Noelia Boutenet (Vos)', rol: 'super_admin' },
+    // react-doctor-disable-next-line react-doctor/supabase-client-owned-authz-field -- demo data, nunca se escribe a Supabase; cambios de rol via RPC update_user_role
     { user_id: 'u2', email: 'raul@faradayenergy.com', nombre: 'Raul Tecnico', rol: 'admin' },
     { user_id: 'u3', email: 'nuevo@empleado.com', nombre: '', rol: 'pending' },
     { user_id: 'u4', email: 'otro@empleado.com', nombre: '', rol: 'pending' }
@@ -472,13 +473,13 @@
       ].map(function (v) { return '"' + String(v || '').replace(/"/g, '""') + '"'; }).join(';'));
     });
     var blob = new Blob(['﻿' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
     var link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
+    link.href = url;
     link.download = 'faraday-consultas-' + new Date().toISOString().slice(0, 10) + '.csv';
     document.body.appendChild(link);
     link.click();
-    URL.revokeObjectURL(link.href);
-    setTimeout(function () { link.remove(); }, 120);
+    setTimeout(function () { URL.revokeObjectURL(url); link.remove(); }, 120);
   });
 
   /* ================= AUTH ================= */

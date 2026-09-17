@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARADAY ADMIN · Descargar App</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <style>
+    .dl-strip { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.55rem clamp(1rem, 3vw, 3rem); border-bottom: 1px solid var(--gray-600); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); flex-wrap: wrap; }
+    .dl-strip b { color: var(--gold); font-weight: 500; }
+    .dl-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem clamp(1rem, 3vw, 3rem); border-bottom: 1px solid var(--gray-600); }
+    .dl-logo { font-family: var(--font-display); font-size: 1.15rem; line-height: 1; color: var(--white); }
+    .dl-logo span { color: var(--gold); }
+    .dl-logo-sub { margin-left: 0.7rem; font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.2em; color: var(--gray-400); text-transform: uppercase; }
+    .dl-warn { display: none; margin: 1.5rem clamp(1rem, 3vw, 3rem) 0; padding: 0.9rem 1.25rem; border: 1px solid var(--gold); background: rgba(236, 177, 33, 0.08); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; color: var(--gold); }
+    .dl-main { max-width: 1200px; margin: 0 auto; padding: clamp(3rem, 8vw, 7rem) clamp(1rem, 3vw, 3rem); }
+    .dl-kicker { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-300); margin-bottom: 1.25rem; }
+    .dl-kicker b { color: var(--gold); font-weight: 500; }
+    .dl-title { font-family: var(--font-display); font-size: clamp(2.75rem, 9vw, 8.5rem); line-height: 0.92; letter-spacing: -0.02em; text-transform: uppercase; color: var(--white); }
+    .dl-title span { color: var(--gold); }
+    .dl-sub { max-width: 46ch; margin: 1.75rem 0 2.5rem; font-size: var(--type-body); color: var(--gray-200); }
+    .dl-cta-row { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .dl-meta { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); }
+    .dl-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; margin-top: clamp(3rem, 7vw, 6rem); }
+    .dl-h2 { font-family: var(--font-display); font-size: var(--type-h3); text-transform: uppercase; color: var(--white); letter-spacing: 0.01em; margin-bottom: 1.5rem; }
+    .dl-h2 span { color: var(--gold); }
+    .dl-steps { margin: 0; padding: 0; list-style: none; }
+    .dl-step { display: flex; gap: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--gray-600); font-family: var(--font-mono); font-size: var(--type-small); color: var(--gray-200); }
+    .dl-step:last-child { border-bottom: 1px solid var(--gray-600); }
+    .dl-step-num { flex-shrink: 0; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--gold); padding-top: 0.2rem; }
+    .dl-qr { padding: 1.25rem; border: 1px solid var(--gray-600); border-top: 2px solid var(--gold); background: var(--gray-700); }
+    .dl-qr-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+    .dl-qr-title { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    .dl-qr-note { font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.1em; color: var(--gray-400); }
+    .dl-qr-canvas { display: flex; align-items: center; justify-content: center; padding: 1rem; background: #ffffff; }
+    .dl-qr-canvas img { width: min(260px, 100%); height: auto; }
+    .dl-qr-cap { margin-top: 1rem; font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); text-align: center; }
+    .dl-foot { padding: 2rem clamp(1rem, 3vw, 3rem); border-top: 3px solid var(--gold); font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-400); display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    @media (max-width: 860px) { .dl-grid { grid-template-columns: 1fr; } .dl-qr { max-width: 380px; } }
+  </style>
+</head>
+<body>
+  <div class="dl-strip">
+    <span>FARADAY ENERGY S.R.L.</span>
+    <span><b>ADMIN APP</b> · DESCARGA OFICIAL</span>
+    <span>SALTA · ARGENTINA</span>
+  </div>
+
+  <header class="dl-head">
+    <div class="dl-logo">FARADAY<span> ENERGY</span><span class="dl-logo-sub">ADMIN · ANDROID</span></div>
+  </header>
+
+  <div class="dl-warn" id="dl-warn">Esta app se instala en dispositivos Android. Abrí esta página desde un celular Android para descargar el APK (o escaneá el QR con uno).</div>
+
+  <main class="dl-main" id="main">
+    <p class="dl-kicker">Versión Android · <b>APK firmado</b> · TWA sin barra de navegador</p>
+    <h1 class="dl-title tight">Descargá<br>la <span>App</span></h1>
+    <p class="dl-sub">FARADAY ADMIN en tu celular: todas las consultas del formulario, el equipo y las notificaciones al instante. Instalación en 3 pasos.</p>
+
+    <div class="dl-cta-row">
+      <a id="dl-cta" class="btn btn--lg" href="../downloads/faraday-admin.apk" download role="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5"/><path d="M4 21h16"/></svg>
+        DESCARGAR APK
+      </a>
+      <span class="dl-meta">faraday-admin.apk · ~880 KB · Android 5.0+</span>
+    </div>
+
+    <div class="dl-grid">
+      <section aria-labelledby="dl-steps-h">
+        <h2 class="dl-h2" id="dl-steps-h">Instalación <span>en 3 pasos</span></h2>
+        <ol class="dl-steps">
+          <li class="dl-step"><span class="dl-step-num">01</span><span>Descargá el APK con el botón (o escaneá el QR desde otro Android).</span></li>
+          <li class="dl-step"><span class="dl-step-num">02</span><span>Abrilo desde las descargas y aceptá <b>instalar apps desconocidas</b> si el sistema lo pide.</span></li>
+          <li class="dl-step"><span class="dl-step-num">03</span><span>Iniciá sesión con tu usuario FARADAY y activá las notificaciones desde el panel.</span></li>
+        </ol>
+      </section>
+
+      <aside class="dl-qr" aria-label="Descarga por codigo QR">
+        <div class="dl-qr-head">
+          <span class="dl-qr-title">Descarga directa</span>
+          <span class="dl-qr-note">NO PUBLICABLE</span>
+        </div>
+        <div class="dl-qr-canvas">
+          <img src="../assets/img/qr-descarga.png" alt="Codigo QR para descargar el APK de FARADAY ADMIN" width="260" height="260">
+        </div>
+        <p class="dl-qr-cap">Escanéalo con tu celular Android</p>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="dl-foot">
+    <span>FARADAY ENERGY S.R.L.</span>
+    <span>© 2026 · Intranet del equipo</span>
+  </footer>
+
+  <script>
+    (function () {
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var warn = document.getElementById('dl-warn');
+      var cta = document.getElementById('dl-cta');
+      if (!isAndroid) {
+        if (warn) warn.style.display = 'block';
+        if (cta) cta.style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>

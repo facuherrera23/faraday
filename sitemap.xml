@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://faradayenergy.com.ar/</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/quienes-somos.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/quienes-somos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/quienes-somos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/quienes-somos.html"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicios.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/servicios.html"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/clientes.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/contacto.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/contacto.html"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-asesoramiento.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-obras-electricas.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-mantenimiento.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-energia-solar.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-respaldo-energia.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-climatizacion.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-obra-civil.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-llave-en-mano.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-tecnologia.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/pages/servicio-seguridad-fisica.html</loc>
+    <lastmod>2026-09-05</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/en/index.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/en/quienes-somos.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/quienes-somos.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/quienes-somos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/quienes-somos.html"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/en/servicios.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/servicios.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/servicios.html"/>
+  </url>
+  <url>
+    <loc>https://faradayenergy.com.ar/en/contacto.html</loc>
+    <lastmod>2026-09-17</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://faradayenergy.com.ar/pages/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://faradayenergy.com.ar/en/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://faradayenergy.com.ar/pages/contacto.html"/>
+  </url>
+</urlset>

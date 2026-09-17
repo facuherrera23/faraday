@@ -1,0 +1,18 @@
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; border-radius: 0 !important; }
+html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 2rem); background: var(--black); color: var(--white); font-family: var(--font-body); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+body { min-height: 100dvh; overflow-x: hidden; position: relative; }
+body::before { content: ''; position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; }
+a { color: var(--gold); text-decoration: none; transition: color var(--duration-fast); }
+a:hover { color: var(--white); }
+img { display: block; max-width: 100%; height: auto; }
+::selection { background: var(--gold); color: var(--black); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+.display { font-family: var(--font-display); }
+.serif { font-family: var(--font-serif); }
+.mono { font-family: var(--font-mono); }
+.tight { letter-spacing: -0.04em; }
+.gold { color: var(--gold); }
+.blue { color: var(--blue); }
+.uppercase { text-transform: uppercase; }

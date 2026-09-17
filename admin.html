@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>FARADAY ADMIN | Consultas</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="manifest" href="admin.webmanifest">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-title" content="FARADAY Admin">
+  <meta name="apple-mobile-web-app-title" content="FARADAY Admin">
+  <meta name="theme-color" content="#000000">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    body { background: var(--black); min-height: 100dvh; }
+    .admin-shell { min-height: 100dvh; display: flex; flex-direction: column; }
+    .admin-login { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; position: relative; overflow: hidden; }
+    .admin-login::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: linear-gradient(var(--gray-500) 1px, transparent 1px), linear-gradient(90deg, var(--gray-500) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+    .admin-login-card { position: relative; z-index: 2; width: 100%; max-width: 420px; }
+    .admin-login-logo { font-family: var(--font-display); font-size: 2rem; text-transform: uppercase; letter-spacing: -0.03em; color: var(--white); }
+    .admin-login-logo span { color: var(--gold); }
+    .admin-login-card form { display: flex; flex-direction: column; gap: 1rem; }
+    .admin-input { width: 100%; background: transparent; border: 1px solid var(--gray-500); color: var(--white); font-family: var(--font-mono); font-size: var(--type-small); padding: 0.8rem 1rem; outline: none; }
+    .admin-input:focus { border-color: var(--gold); }
+    .admin-error { color: var(--blue); font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; min-height: 1rem; }
+    .admin-divider { display: flex; align-items: center; gap: 1rem; margin: 1rem 0; color: var(--gray-400); font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; }
+    .admin-divider::before, .admin-divider::after { content: ''; flex: 1; height: 1px; background: var(--gray-500); }
+    .admin-main { display: none; }
+    .admin-main.visible { display: block; }
+    .admin-topbar { display: flex; justify-content: space-between; align-items: center; padding: 1rem clamp(1rem,3vw,2rem); border-bottom: 1px solid var(--gray-600); gap: 1rem; flex-wrap: wrap; }
+    .admin-topbar .brand { font-family: var(--font-display); font-size: 1rem; text-transform: uppercase; letter-spacing: -0.02em; color: var(--white); }
+    .admin-topbar .brand span { color: var(--gold); }
+    .admin-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--gray-600); overflow-x: auto; }
+    .admin-tab { padding: 0.8rem 1.25rem; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; background: none; border: none; color: var(--gray-400); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; }
+    .admin-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .admin-view { display: none; padding: clamp(1rem,3vw,2rem); }
+    .admin-view.active { display: block; }
+    .lead-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray-500); }
+    .lead-item { background: var(--gray-700); padding: 1rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; cursor: pointer; text-align: left; width: 100%; border: none; color: var(--white); font-family: inherit; }
+    .lead-item:hover { background: var(--gray-600); }
+    .lead-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .lead-dot.nuevo { background: var(--gold); }
+    .lead-dot.leido { background: var(--blue); }
+    .lead-dot.contactado { background: var(--gray-300); }
+    .lead-dot.cerrado { background: var(--gray-500); }
+    .lead-name { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); }
+    .lead-meta { font-size: 0.55rem; color: var(--gray-400); margin-top: 0.15rem; }
+    .lead-svc { font-family: var(--font-mono); font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); background: rgba(236,177,33,0.1); padding: 2px 6px; border: 1px solid rgba(236,177,33,0.3); border-radius: 2px; }
+    .lead-date { font-family: var(--font-mono); font-size: 0.55rem; color: var(--gray-400); }
+    .detail-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; display: none; align-items: center; justify-content: center; padding: 1rem; }
+    .detail-overlay.visible { display: flex; }
+    .detail-modal { background: var(--gray-700); border: 1px solid var(--gray-500); max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; padding: clamp(1.5rem,3vw,2.5rem); position: relative; }
+    .detail-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--gray-400); cursor: pointer; font-family: var(--font-mono); font-size: 1.2rem; padding: 0.5rem; }
+    .detail-close:hover { color: var(--gold); }
+    .detail-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid var(--gray-600); font-family: var(--font-mono); font-size: 0.65rem; }
+    .detail-row .k { color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.1em; }
+    .detail-row .v { color: var(--white); text-align: right; max-width: 60%; word-break: break-word; }
+    .detail-row .v.gold { color: var(--gold); }
+    .detail-msg { padding: 1rem 0; font-family: var(--font-mono); font-size: 0.7rem; color: var(--gray-200); line-height: 1.7; border-bottom: 1px solid var(--gray-500); }
+    .detail-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .btn-estado { padding: 0.35em 0.85em; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid var(--gray-500); background: none; color: var(--gray-300); cursor: pointer; }
+    .btn-estado:hover, .btn-estado.active { border-color: var(--gold); color: var(--gold); }
+    .member-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--gray-600); gap: 1rem; font-family: var(--font-mono); font-size: 0.65rem; flex-wrap: wrap; }
+    .member-select { background: var(--gray-700); color: var(--white); border: 1px solid var(--gray-500); padding: 0.3rem 0.5rem; font-family: var(--font-mono); font-size: 0.6rem; width: 10ch; }
+    .admin-msg { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.5rem 0; }
+    .admin-msg.ok { color: var(--gold); }
+    .admin-msg.err { color: var(--blue); }
+    .btn-google { background: transparent; color: var(--white); border: 1px solid var(--gray-400); padding: 0.7rem 1.25rem; width: 100%; cursor: pointer; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .btn-google:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 768px) { .lead-item { grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 0.5rem; } .lead-svc { grid-column: 2; } }
+  </style>
+</head>
+<body class="admin-shell">
+
+<div id="view-login" class="admin-login">
+  <div class="admin-login-card">
+    <div class="admin-login-logo">FARADAY<span>ENERGY</span></div>
+    <p class="mono" style="color:var(--gray-400);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.15em;margin:0.5rem 0 2rem">Panel de control privado</p>
+    <form id="login-form">
+      <input type="email" id="login-email" class="admin-input" placeholder="EMAIL" required>
+      <input type="password" id="login-password" class="admin-input" placeholder="CONTRASENA" required>
+      <div class="admin-error" id="login-error"></div>
+      <button type="submit" class="btn" style="width:100%">ENTRAR <span style="color:var(--gold)">&gt;&gt;&gt;</span></button>
+    </form>
+    <div class="admin-divider">O</div>
+    <button type="button" id="btn-google" class="btn-google">Entrar con Google</button>
+  </div>
+</div>
+
+<div id="view-pending" style="display:none;min-height:100dvh;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center">
+  <div style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4rem);line-height:0.9;text-transform:uppercase;color:var(--white)">ACCESO<br><span style="color:var(--gold)">PENDIENTE</span></div>
+  <p class="mono" style="color:var(--gray-300);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;margin-top:1.5rem;max-width:40ch">Tu cuenta fue creada pero necesita la aprobacion de un super-admin. Pide al administrador que te autorice desde la pestana EQUIPO.</p>
+  <button type="button" id="btn-pending-logout" class="btn btn--blue" style="margin-top:2rem">SALIR</button>
+</div>
+
+<div id="view-main" class="admin-main">
+  <div class="admin-topbar">
+    <div class="brand">FARADAY <span>ADMIN</span></div>
+    <div style="display:flex;gap:0.75rem;align-items:center">
+      <span id="current-user" style="font-family:var(--font-mono);font-size:0.55rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em"></span>
+      <button type="button" id="btn-logout" class="btn-estado">SALIR</button>
+      <button type="button" id="btn-refresh" class="btn-estado">ACTUALIZAR</button>
+    </div>
+  </div>
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-view="leads">CONSULTAS <span id="badge-leads" style="color:var(--gold)">0</span></button>
+    <button class="admin-tab" data-view="kanban">KANBAN</button><button class="admin-tab" data-view="testimonios">TESTIMONIOS <span id="badge-testimonios" style="color:var(--gold)">0</span></button><button class="admin-tab" data-view="equipo" id="tab-equipo" style="display:none">EQUIPO <span id="badge-equipo" style="color:var(--gold)">0</span></button>
+  </div>
+
+  <div class="admin-view active" data-view="leads">
+    <div id="stats-row" style="display:flex;gap:clamp(1rem,2vw,2.5rem);padding:1rem;background:var(--gray-700);border:1px solid var(--gray-500);margin-bottom:1.5rem;flex-wrap:wrap">
+      <div><div style="font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);color:var(--gold);line-height:1" id="stat-total">-</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem">TOTAL</div></div>
+      <div><div style="font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);color:var(--gold);line-height:1" id="stat-nuevos">-</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem">NUEVAS</div></div>
+      <div><div style="font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2rem);color:var(--blue);line-height:1" id="stat-hoy">-</div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem">HOY</div></div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:0.5rem">
+        <input type="search" id="search-input" class="admin-search" placeholder="Buscar..." aria-label="Buscar consulta">
+        <button type="button" id="btn-csv" class="btn" style="padding:0.5rem 1rem;font-size:0.65rem" title="Descargar CSV">CSV <span style="color:var(--gold)">&gt;&gt;&gt;</span></button>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center">
+      <button class="btn-estado active" data-filter="">TODAS</button>
+      <button class="btn-estado" data-filter="nuevo">NUEVAS</button>
+      <button class="btn-estado" data-filter="contactado">EN CONTACTO</button>
+      <button class="btn-estado" data-filter="cerrado">CERRADAS</button>
+      <select id="filter-service" class="member-select" style="margin-left:auto;width:auto" aria-label="Filtrar por servicio">
+        <option value="">TODOS LOS SERVICIOS</option>
+        <option value="ASESORAMIENTO ENERGETICO">ASESORAMIENTO ENERGETICO</option>
+        <option value="OBRAS ELECTRICAS">OBRAS ELECTRICAS</option>
+        <option value="MANTENIMIENTO PREVENTIVO">MANTENIMIENTO PREVENTIVO</option>
+        <option value="ENERGIA SOLAR">ENERGIA SOLAR</option>
+        <option value="RESPALDO DE ENERGIA">RESPALDO DE ENERGIA</option>
+        <option value="CLIMATIZACION CONFORT TERMICO">CLIMATIZACION</option>
+        <option value="OBRA CIVIL">OBRA CIVIL</option>
+        <option value="SOLUCIONES LLAVE EN MANO">LLAVE EN MANO</option>
+        <option value="TECNOLOGIA INTEGRAL">TECNOLOGIA</option>
+        <option value="SEGURIDAD FISICA">SEGURIDAD FISICA</option>
+        <option value="OTRA CONSULTA">OTRA CONSULTA</option>
+      </select>
+    </div>
+    <div id="leads-list" class="lead-list">
+      <p style="color:var(--gray-400);font-family:var(--font-mono);font-size:0.65rem;padding:2rem 1rem;text-align:center">Cargando consultas...</p>
+    </div>
+  </div>
+
+  <div class="admin-view" data-view="kanban">
+    <div id="kanban-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+      <div class="kanban-col" data-estado="nuevo">
+        <h4 class="mono" style="font-size:var(--type-micro);text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--gray-500)">NUEVAS</h4>
+        <div class="kanban-cards" style="display:flex;flex-direction:column;gap:0.5rem"></div>
+      </div>
+      <div class="kanban-col" data-estado="leido">
+        <h4 class="mono" style="font-size:var(--type-micro);text-transform:uppercase;letter-spacing:0.12em;color:var(--blue);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--gray-500)">LEIDAS</h4>
+        <div class="kanban-cards" style="display:flex;flex-direction:column;gap:0.5rem"></div>
+      </div>
+      <div class="kanban-col" data-estado="contactado">
+        <h4 class="mono" style="font-size:var(--type-micro);text-transform:uppercase;letter-spacing:0.12em;color:var(--gray-300);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--gray-500)">EN CONTACTO</h4>
+        <div class="kanban-cards" style="display:flex;flex-direction:column;gap:0.5rem"></div>
+      </div>
+      <div class="kanban-col" data-estado="cerrado">
+        <h4 class="mono" style="font-size:var(--type-micro);text-transform:uppercase;letter-spacing:0.12em;color:var(--gray-400);margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:1px solid var(--gray-500)">CERRADAS</h4>
+        <div class="kanban-cards" style="display:flex;flex-direction:column;gap:0.5rem"></div>
+      </div>
+    </div>
+  </div>
+  <div class="admin-view" data-view="testimonios">
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;text-transform:uppercase;color:var(--white);margin-bottom:1rem">Testimonios de clientes</h3>
+    <div id="testimoniales-info" style="padding:1rem;background:var(--gray-700);border:1px solid var(--gray-500);margin-bottom:1.5rem;font-family:var(--font-mono);font-size:0.6rem;color:var(--gray-300);text-transform:uppercase;letter-spacing:0.08em;line-height:1.7">
+      Llena testimonios con los datos reales que te pasen los clientes ya y aproba para que se publiquen en la pagina Clientes. Solo los aprobados se ven.
+    </div>
+    <div id="testimonios-list" style="display:flex;flex-direction:column;gap:1px;background:var(--gray-500)">
+      <p style="padding:2rem;text-align:center;font-family:var(--font-mono);font-size:0.65rem;color:var(--gray-400)">Cargando testimonios...</p>
+    </div>
+    </div>
+ <div class="admin-view" data-view="equipo">
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;text-transform:uppercase;color:var(--white);margin-bottom:1rem">Equipo de administracion</h3>
+    <div id="members-list"></div>
+  </div>
+</div>
+
+<div id="detail-overlay" class="detail-overlay" aria-modal="true" role="dialog">
+  <div class="detail-modal">
+    <button class="detail-close" id="detail-close" aria-label="Cerrar">X</button>
+    <div class="detail-row"><span class="k">NOMBRE</span><span class="v" id="d-nombre"></span></div>
+    <div class="detail-row"><span class="k">EMPRESA</span><span class="v" id="d-empresa"></span></div>
+    <div class="detail-row"><span class="k">EMAIL</span><span class="v gold"><a href="#" id="d-email" style="color:var(--gold);text-decoration:none"></a></span></div>
+    <div class="detail-row"><span class="k">TELEFONO</span><span class="v" id="d-telefono"></span></div>
+    <div class="detail-row"><span class="k">SERVICIO</span><span class="v gold" id="d-servicio"></span></div>
+    <div class="detail-row"><span class="k">FECHA</span><span class="v" id="d-fecha"></span></div>
+    <div class="detail-msg" id="d-mensaje"></div>
+    <div class="detail-actions" id="d-estados"></div>
+  </div>
+</div>
+
+  <style>
+    .install-banner { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 200; background: var(--gold); color: var(--black); padding: 0.7rem 1.1rem; font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; display: none; }
+    .install-banner.show { display: block; }
+    @media (max-width: 768px) { .install-banner { right: 1rem; left: auto; bottom: 5rem; } }
+  </style>
+  <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(function(){});}</script>
+<script src="js/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

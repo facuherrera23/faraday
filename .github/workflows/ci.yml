@@ -1,0 +1,32 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Lighthouse CI and a static server
+        run: npm install -g @lhci/cli http-server
+
+      - name: Serve site
+        run: http-server -p 8123 -a 127.0.0.1 --silent &
+
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:8123/ > /dev/null; then break; fi
+            sleep 1
+          done
+
+      - name: Run Lighthouse CI
+        run: lhci autorun

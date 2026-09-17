@@ -1,0 +1,26 @@
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity var(--duration-reveal) var(--ease-out-expo), transform var(--duration-reveal) var(--ease-out-expo); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal--left { transform: translateX(-40px); }
+.reveal--left.visible { transform: translateX(0); }
+.reveal--right { transform: translateX(40px); }
+.reveal--right.visible { transform: translateX(0); }
+.reveal--scale { transform: scale(0.95); }
+.reveal--scale.visible { transform: scale(1); }
+.reveal-d1 { transition-delay: 100ms; }
+.reveal-d2 { transition-delay: 200ms; }
+.reveal-d3 { transition-delay: 300ms; }
+.reveal-d4 { transition-delay: 400ms; }
+.reveal-d5 { transition-delay: 500ms; }
+.hero-enter { opacity: 0; transform: translateY(24px); }
+.hero-enter.loaded { opacity: 1; transform: translateY(0); transition: opacity 1400ms var(--ease-out-expo), transform 1400ms var(--ease-out-expo); }
+.hero-enter--d1 { transition-delay: 200ms !important; }
+.hero-enter--d2 { transition-delay: 400ms !important; }
+.hero-enter--d3 { transition-delay: 600ms !important; }
+.hero-enter--d4 { transition-delay: 800ms !important; }
+.gradient-line { height: 2px; background: linear-gradient(90deg, var(--gold), var(--blue), var(--gold)); background-size: 200% 100%; animation: gradient-shift 8s linear infinite; }
+@keyframes gradient-shift { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
+.hover-lift { transition: transform var(--duration-normal) var(--ease-out-expo), border-color var(--duration-fast); }
+.hover-lift:hover { transform: translateY(-4px); border-color: var(--gold); }
+.pulse { animation: pulse 3s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } .reveal, .hero-enter { opacity: 1; transform: none; } }

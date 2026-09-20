@@ -78,3 +78,6 @@ __pycache__/
 
 # Supabase CLI temp artifacts
 supabase/.temp/
+
+# Lighthouse CI artifacts
+.lighthouseci/

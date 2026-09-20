@@ -1,5 +1,20 @@
 # FARADAY ENERGY - Setup del Backend (Supabase) y APK
 
+> ## ESTADO ACTUAL — 19/9/2026 (leer primero)
+>
+> 1. **El pipeline de leads por EMAIL está INACTIVO.** formsubmit.co (el servicio que envía
+>    cada formulario del sitio a `faradayenergycfc@gmail.com`) requiere una activación única
+>    que nunca se hizo. **Acción #1, 30 segundos:** abrí ese Gmail, buscá el mail de
+>    "FormSubmit" (revisá spam/promociones; se re-envía con cada prueba) y clickeá
+>    **Activate Form**. Desde ese momento cada formulario llega a la casilla.
+>    Mientras tanto, el sitio encola los leads en el navegador del visitante y los
+>    re-envía automáticamente cuando el form ya esté activo.
+> 2. **El proyecto Supabase `uvkmmlmeumrownidhfqu` fue ELIMINADO** (su DNS ya no existe).
+>    `js/supabase-config.js` apunta a un proyecto muerto: el panel admin, el push y el
+>    auto-reply están caídos hasta recrear el proyecto con esta guía.
+> 3. Las claves VAPID fueron **rotadas** (el par anterior quedó expuesto por un deploy sin
+>    `.vercelignore`). El par nuevo vive en `.pwa-signing/vapid-keys.txt` (no se sube al repo).
+
 Todo el código ya está escrito y con la identidad visual de la web. Este documento es la guía paso a paso para poner a funcionar TODO con costo cero. Solo necesitas crear una cuenta gratuita de Supabase (no se cobra nada hasta que agotás el tier gratuito, que es enorme para este caso).
 
 ---
@@ -38,7 +53,8 @@ Esto crea:
 2. Copiá:
    - **Project URL** (empieza con `https://`)
    - **anon public** (la clave larga, empieza con `eyJ...`)
-3. Editá el archivo `js/supabase-config.js` que está en la raíz y reemplazá:
+3. Editá el archivo `js/supabase-config.js` que está en la raíz y reemplazá los valores actuales
+   (apuntan al proyecto eliminado, ya no funcionan):
 
 ```js
 url: 'TU_SUPABASE_URL',        // pegá la Project URL
@@ -135,7 +151,7 @@ El botón **ACTIVAR NOTIFICACIONES** (topbar del panel) ya está en el código. 
 
 1. **Crear la tabla** — si ya corriste `setup.sql` antes de que existiera esta sección, abrí **SQL Editor > New query** y pegá TODO el contenido de `supabase/push-subscriptions.sql` (crea la tabla `push_subscriptions` donde se guardan los teléfonos/navegadores suscriptos).
 2. **Deploy de la función `send-push`** — **Edge Functions > New function**, nombre `send-push`, pegá el contenido de `supabase/functions/send-push/index.ts` y deploy. Después en pestaña **Secrets** agregá:
-   - `VAPID_PUBLIC_KEY` = `BIKsum_eQdwtSSyWtPrQeEZxT6UvRlVhc1S0Twdg426Y8D6fCU2fGjWOO__DlEaxCRu42o7lfFW0mmSQh6Flj64`
+   - `VAPID_PUBLIC_KEY` = `BEzVRS3-OOtITZdElDEEtYq0aDkRMTvbdjOJXi2Vv850IUuK2PYR2EPhp9TTK-JoBoxW4oIcnaguNdt7zPBV_0k`
    - `VAPID_PRIVATE_KEY` = la clave privada que está en `.pwa-signing/vapid-keys.txt` (secreto, nunca se sube al repo)
    - `VAPID_SUBJECT` = `mailto:noelia@faradayenergy.com`
 3. **Webhook de aviso** — **Database > Webhooks > Add**: tabla `contact_submissions`, evento `INSERT`, URL `https://TU-PROYECTO.supabase.co/functions/v1/send-push`, headers `Content-Type: application/json` + `Authorization: Bearer <tu anon key de Settings > API>`.

@@ -167,7 +167,7 @@
     var didForm = { ok: false };
 
     function redirect() {
-      window.location.href = IS_EN ? '../gracias.html' : 'gracias.html';
+      window.location.href = IS_EN ? '../pages/gracias.html' : 'gracias.html';
     }
 
     function onAnySuccess() {
@@ -189,6 +189,17 @@
       }).then(function (r) { cb(r.ok); }).catch(function () { cb(false); });
     }
 
+    function formsubmitOk(r) {
+      return r.text().then(function (t) {
+        if (!r.ok) return false;
+        try {
+          var j = JSON.parse(t);
+          if (j && (j.success === 'false' || j.success === false)) return false;
+        } catch (e) { /* body no-JSON: respetar r.ok */ }
+        return true;
+      }).catch(function () { return r.ok; });
+    }
+
     function formsubmitSend(cb) {
       fetch('https://formsubmit.co/ajax/' + encodeURIComponent('faradayenergycfc@gmail.com'), {
         method: 'POST',
@@ -198,7 +209,7 @@
           _replyto: emailVal,
           _captcha: 'false'
         }))
-      }).then(function (r) { cb(r.ok); }).catch(function () { cb(false); });
+      }).then(function (r) { formsubmitOk(r).then(cb); }).catch(function () { cb(false); });
     }
 
     function flushQueue() {
@@ -226,7 +237,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(function (r) { cb(r.ok); }).catch(function () { cb(false); });
+      }).then(function (r) { formsubmitOk(r).then(cb); }).catch(function () { cb(false); });
     }
 
     function queueOffline() {

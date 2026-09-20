@@ -1,5 +1,5 @@
 /* FARADAY ENERGY - Service Worker */
-var VERSION = 'v16';
+var VERSION = 'v17';
 var CACHE_PRE = 'faraday-precache-' + VERSION;
 var CACHE_RUNTIME = 'faraday-runtime-' + VERSION;
 var CACHES = [CACHE_PRE, CACHE_RUNTIME];
@@ -10,7 +10,8 @@ var PRE_CACHE = [
   '/pages/quienes-somos.html', '/pages/servicios.html', '/pages/clientes.html',
   '/pages/casos-exito.html', '/pages/blog.html',
   '/pages/blog-energia-solar.html', '/pages/blog-respaldo-energia.html', '/pages/blog-mantenimiento-electrico.html',
-  '/pages/privacidad.html', '/en/privacy.html', '/pages/contacto.html', '/pages/gracias.html',
+  '/pages/privacidad.html', '/en/privacy.html',
+  '/pages/terminos.html', '/en/terms.html', '/pages/contacto.html', '/pages/gracias.html',
   '/pages/servicio-asesoramiento.html', '/pages/servicio-climatizacion.html',
   '/pages/servicio-energia-solar.html', '/pages/servicio-llave-en-mano.html',
   '/pages/servicio-mantenimiento.html', '/pages/servicio-obra-civil.html',

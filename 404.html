@@ -16,17 +16,19 @@
 <nav class="nav" role="navigation" aria-label="Principal">
   <div class="nav__strip">
     <span>EST. 2018 / SALTA, ARGENTINA</span>
+    
     <span class="nav__strip-mid">ENERGIA / INDUSTRIA / INGENIERIA</span>
     <div class="nav__strip-contacts">
       <a href="tel:+543875151179" class="nav__strip-link">+54 387 515 1179</a>
       <span class="nav__strip-sep">/</span>
       <a href="mailto:faradayenergycfc@gmail.com" class="nav__strip-link">faradayenergycfc@gmail.com</a>
+      <a href="en/index.html" class="nav__strip-link" lang="en" hreflang="en">EN</a>
     </div>
   </div>
   <div class="nav__bar">
     <a href="index.html" class="nav__logo">FAR<span class="nav__logo-accent">A</span>DAY<span class="nav__logo-sub">ENERGY S.R.L.</span></a>
     <ul class="nav__links">
-      <li><a href="index.html" class="nav__link nav__link--active" aria-current="page"><span class="nav__num">01</span> INICIO</a></li>
+      <li><a href="index.html" class="nav__link"><span class="nav__num">01</span> INICIO</a></li>
       <li><a href="pages/quienes-somos.html" class="nav__link"><span class="nav__num">02</span> QUIENES</a></li>
       <li class="nav__item nav__item--has-drop">
         <button type="button" class="nav__link nav__link--button" id="nav-services-btn" aria-expanded="false" aria-controls="nav-dropdown"><span class="nav__num">03</span> SERVICIOS <span class="nav__caret" aria-hidden="true">+</span></button>
@@ -52,13 +54,46 @@
           </div>
         </div>
       </li>
-      <li><a href="pages/contacto.html" class="nav__link"><span class="nav__num">04</span> CONTACTO</a></li>
+      <li><a href="pages/clientes.html" class="nav__link"><span class="nav__num">04</span> CLIENTES</a></li><li><a href="pages/casos-exito.html" class="nav__link"><span class="nav__num">05</span> CASOS</a></li><li><a href="pages/blog.html" class="nav__link"><span class="nav__num">06</span> BLOG</a></li><li><a href="pages/contacto.html" class="nav__link"><span class="nav__num">07</span> CONTACTO</a></li>
     </ul>
     <a href="pages/contacto.html" class="btn nav__cta">HABLEMOS</a>
     <button type="button" class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-mobile"><span class="nav__burger" aria-hidden="true"></span></button>
   </div>
 </nav>
-<main id="main">
+<div class="nav__mobile" id="nav-mobile">
+  <div class="nav__mobile-head">
+    <span class="nav__mobile-kicker">MENU</span>
+    <button type="button" class="nav__m-close" aria-label="Cerrar menu"><span class="nav__burger" aria-hidden="true"></span></button>
+  </div>
+  <div class="nav__mobile-links">
+    <a href="index.html" class="nav__m-link"><span class="nav__num">01</span> INICIO</a>
+    <a href="pages/quienes-somos.html" class="nav__m-link"><span class="nav__num">02</span> QUIENES</a>
+    <button type="button" class="nav__m-link nav__m-link--btn" aria-expanded="false" aria-controls="nav-m-acc"><span class="nav__num">03</span> SERVICIOS <span class="nav__caret" aria-hidden="true">+</span></button>
+    <div class="nav__m-acc" id="nav-m-acc">
+      <div class="nav__m-acc-inner">
+        <a href="pages/servicio-asesoramiento.html" class="nav__m-sub"><span class="nav__drop-num">01</span> ASESORAMIENTO ENERGETICO</a>
+        <a href="pages/servicio-obras-electricas.html" class="nav__m-sub"><span class="nav__drop-num">02</span> OBRAS ELECTRICAS</a>
+        <a href="pages/servicio-mantenimiento.html" class="nav__m-sub"><span class="nav__drop-num">03</span> MANTENIMIENTO PREVENTIVO</a>
+        <a href="pages/servicio-energia-solar.html" class="nav__m-sub"><span class="nav__drop-num">04</span> ENERGIA SOLAR</a>
+        <a href="pages/servicio-respaldo-energia.html" class="nav__m-sub"><span class="nav__drop-num">05</span> RESPALDO DE ENERGIA</a>
+        <a href="pages/servicio-climatizacion.html" class="nav__m-sub"><span class="nav__drop-num">06</span> CLIMATIZACION CONFORT TERMICO</a>
+        <a href="pages/servicio-obra-civil.html" class="nav__m-sub"><span class="nav__drop-num">07</span> OBRA CIVIL</a>
+        <a href="pages/servicio-llave-en-mano.html" class="nav__m-sub"><span class="nav__drop-num">08</span> SOLUCIONES LLAVE EN MANO</a>
+        <a href="pages/servicio-tecnologia.html" class="nav__m-sub"><span class="nav__drop-num">09</span> TECNOLOGIA INTEGRAL</a>
+        <a href="pages/servicio-seguridad-fisica.html" class="nav__m-sub"><span class="nav__drop-num">10</span> SEGURIDAD FISICA</a>
+      </div>
+    </div>
+    <a href="pages/clientes.html" class="nav__m-link"><span class="nav__num">04</span> CLIENTES</a><a href="pages/casos-exito.html" class="nav__m-link"><span class="nav__num">05</span> CASOS</a><a href="pages/blog.html" class="nav__m-link"><span class="nav__num">06</span> BLOG</a><a href="pages/contacto.html" class="nav__m-link"><span class="nav__num">07</span> CONTACTO</a>
+  </div>
+  <div class="nav__mobile-foot">
+    <a href="tel:+543875151179" class="nav__m-tel">+54 387 515 1179</a>
+    <a href="mailto:faradayenergycfc@gmail.com" class="nav__m-mail">faradayenergycfc@gmail.com</a>
+    <span class="nav__m-dir">12 DE OCTUBRE 1419, SALTA</span>
+    <a href="pages/contacto.html" class="btn btn--ghost nav__m-cta">HABLEMOS</a>
+  </div>
+</div>
+
+  <main id="main">
   <section class="section" style="min-height:100dvh;display:flex;align-items:center;padding-top:calc(var(--nav-height) + clamp(3rem,6vw,5rem));background:var(--black);position:relative;overflow:hidden">
     <div class="container">
       <div class="reveal">

@@ -285,17 +285,3 @@
   t.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   show();
 })();
-
-(function () {
-  "use strict";
-  function tryPush() {
-    if (!window.FaradayPush || !window.FaradayPush.init) return;
-    if (window.location.pathname.indexOf("admin") === -1) return;
-    if (window.VAPID_PUBLIC_KEY) {
-      window.FaradayPush.init(window.VAPID_PUBLIC_KEY).then(function (sub) {
-        if (sub) console.log("[push] suscripcion ok");
-      });
-    }
-  }
-  document.addEventListener("DOMContentLoaded", tryPush);
-})();

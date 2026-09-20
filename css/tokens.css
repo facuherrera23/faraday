@@ -22,6 +22,7 @@
   --type-h1: clamp(2.5rem, 8vw, 8rem);
   --type-h2: clamp(1.8rem, 5vw, 5rem);
   --type-h3: clamp(1.2rem, 3vw, 2.5rem);
+  --type-h4: clamp(1.05rem, 2vw, 1.75rem);
   --type-body: clamp(1rem, 1.2vw, 1.2rem);
   --type-small: 0.875rem;
   --type-micro: 0.75rem;

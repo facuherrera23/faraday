@@ -550,6 +550,8 @@
 
   function bootDemo() {
     els.loginError.textContent = '';
+    var banner = document.getElementById('demo-banner');
+    if (banner) banner.style.display = 'block';
     bootMain('super_admin', 'demo@faraday.local', 'u1');
     loadLeads();
     loadTeam();

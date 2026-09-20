@@ -4,31 +4,36 @@
   /*
    * FARADAY ENERGY - Supabase config
    *
-   * Cuando crees el proyecto en https://supabase.com:
+   * ## ESTADO: ESPERANDO EL PROYECTO NUEVO ##
+   * El proyecto anterior (uvkmmlmeumrownidhfqu) fue ELIMINADO de Supabase.
+   * Cuando crees el nuevo proyecto:
    *   1. Proyecto > Settings > API
-   *   2. Copiá "Project URL" y pegalo en SUPABASE_URL
-   *   3. Copiá "anon public" key y pegála en SUPABASE_ANON_KEY
+   *   2. Copia "Project URL" y pegala en SUPABASE_URL_AQUI (incluye el https://)
+   *   3. Copia "anon public" y pegala en SUPABASE_ANON_KEY_AQUI (empieza con eyJ...)
+   *   O MAS FACIL: corre  python _setup_backend.py "URL" "ANON_KEY"
+   *   Guia completa paso a paso: PUBLICAR.md (raiz del repo)
    *
    * NUNCA pegues la service_role key aqui - esta pagina es publica.
+   * Con estos placeholders el sitio funciona igual (form via email, admin en DEMO);
+   * al rellenarlos se activa todo automaticamente.
    */
 
   window.SUPABASE_CONFIG = {
-    url: 'https://uvkmmlmeumrownidhfqu.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a21tbG1ldW1yb3duaWRoZnF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3NTAyMDcsImV4cCI6MjEwNDMyNjIwN30.Qs-KLjT_r-BInOUrTaEzzEY4Ge6nJ6bkxOM1CJu4eqk',
+    url: 'SUPABASE_URL_AQUI',
+    anonKey: 'SUPABASE_ANON_KEY_AQUI',
     table: 'contact_submissions',
     /*
      * Web Push (VAPID). La publica viaja al navegador; la PRIVADA vive SOLO
      * como secret de la Edge Function send-push en Supabase (VAPID_PRIVATE_KEY).
-     * Generadas con: npx web-push generate-vapid-keys
-     * ROTADAS 2026-09-19: el par anterior fue expuesto publicamente por deploys
-     * sin .vercelignore. El par completo vive en .pwa-signing/vapid-keys.txt
-     * (gitignored). NUNCA configurar la clave privada vieja en ningun lado.
+     * Rotadas 2026-09-19 (el par anterior fue expuesto por deploys sin .vercelignore).
+     * Par completo + instrucciones en .pwa-signing/vapid-keys.txt (gitignored).
+     * NO depende del proyecto Supabase: ya esta lista para el nuevo.
      */
     vapidPublicKey: 'BEzVRS3-OOtITZdElDEEtYq0aDkRMTvbdjOJXi2Vv850IUuK2PYR2EPhp9TTK-JoBoxW4oIcnaguNdt7zPBV_0k'
   };
 
   window.SUPABASE_READY = function () {
     var c = window.SUPABASE_CONFIG;
-    return c.url !== 'TU_SUPABASE_URL' && c.anonKey !== 'TU_SUPABASE_ANON_KEY' && c.url.indexOf('https://') === 0;
+    return c.url.indexOf('https://') === 0 && c.anonKey.indexOf('eyJ') === 0;
   };
 })();

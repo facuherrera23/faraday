@@ -20,8 +20,11 @@
      * Web Push (VAPID). La publica viaja al navegador; la PRIVADA vive SOLO
      * como secret de la Edge Function send-push en Supabase (VAPID_PRIVATE_KEY).
      * Generadas con: npx web-push generate-vapid-keys
+     * ROTADAS 2026-09-19: el par anterior fue expuesto publicamente por deploys
+     * sin .vercelignore. El par completo vive en .pwa-signing/vapid-keys.txt
+     * (gitignored). NUNCA configurar la clave privada vieja en ningun lado.
      */
-    vapidPublicKey: 'BIKsum_eQdwtSSyWtPrQeEZxT6UvRlVhc1S0Twdg426Y8D6fCU2fGjWOO__DlEaxCRu42o7lfFW0mmSQh6Flj64'
+    vapidPublicKey: 'BEzVRS3-OOtITZdElDEEtYq0aDkRMTvbdjOJXi2Vv850IUuK2PYR2EPhp9TTK-JoBoxW4oIcnaguNdt7zPBV_0k'
   };
 
   window.SUPABASE_READY = function () {

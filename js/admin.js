@@ -526,7 +526,11 @@
         }
         db.auth.getSession().then(function (s) {
           if (s.data && s.data.session) handleRealSession(s.data.session);
+        }).catch(function () {
+          els.loginError.textContent = 'Sin conexion con el servidor. Verifica internet o la configuracion de Supabase.';
         });
+      }).catch(function () {
+        els.loginError.textContent = 'Sin conexion con el servidor. Verifica internet o la configuracion de Supabase.';
       });
     });
   }

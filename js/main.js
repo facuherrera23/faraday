@@ -194,7 +194,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(Object.assign({}, data, {
-          _subject: IS_EN ? 'New inquiry from faradayenergy.com.ar' : 'Nueva consulta de faradayenergy.com.ar',
+          _subject: IS_EN ? 'New inquiry - FARADAY ENERGY website' : 'Nueva consulta - sitio web FARADAY ENERGY',
           _replyto: emailVal,
           _captcha: 'false'
         }))
@@ -234,7 +234,7 @@
       try {
         var arr = JSON.parse(localStorage.getItem(key) || '[]');
         arr.push(Object.assign({}, data, {
-          _subject: IS_EN ? 'New inquiry from faradayenergy.com.ar' : 'Nueva consulta de faradayenergy.com.ar',
+          _subject: IS_EN ? 'New inquiry - FARADAY ENERGY website' : 'Nueva consulta - sitio web FARADAY ENERGY',
           _replyto: emailVal
         }));
         localStorage.setItem(key, JSON.stringify(arr));

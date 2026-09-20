@@ -101,6 +101,22 @@
     sum.style.display = 'block';
     var go = document.getElementById('wiz-apply');
     if (go) go.style.display = 'inline-flex';
+    var wa = document.getElementById('wiz-wa');
+    if (wa) wa.style.display = 'inline-flex';
+  }
+
+  function draftMessage(withDetails) {
+    var base = (IS_EN ? 'SERVICE: ' : 'SERVICIO: ') + labelFor(state.service, 'service') + '\n' +
+      (IS_EN ? 'SECTOR: ' : 'SECTOR: ') + labelFor(state.sector, 'sector') + '\n' +
+      (IS_EN ? 'URGENCY: ' : 'URGENCIA: ') + labelFor(state.urgency, 'urgency');
+    if (!withDetails) return base;
+    return base + '\n\n' +
+      (IS_EN ? 'Project details:\n[Write your project details here.]' : 'Detalle del proyecto:\n[Escriba aqui detalles de su proyecto]');
+  }
+
+  function waMessage() {
+    return (IS_EN ? 'Hi FARADAY ENERGY, I would like a quote.\n' : 'Hola FARADAY ENERGY, quisiera una cotizacion.\n') +
+      draftMessage(false);
   }
 
   function saveDraft() {
@@ -119,10 +135,7 @@
     if (!frm) return;
     var msg = frm.querySelector('[name="mensaje"]');
     if (msg) {
-      msg.value = (IS_EN ? 'SERVICE: ' : 'SERVICIO: ') + labelFor(state.service, 'service') + '\n' +
-        (IS_EN ? 'SECTOR: ' : 'SECTOR: ') + labelFor(state.sector, 'sector') + '\n' +
-        (IS_EN ? 'URGENCY: ' : 'URGENCIA: ') + labelFor(state.urgency, 'urgency') + '\n\n' +
-        (IS_EN ? 'Project details:\n[Write your project details here.]' : 'Detalle del proyecto:\n[Escriba aqui detalles de su proyecto]');
+      msg.value = draftMessage(true);
       msg.dispatchEvent(new Event('input', { bubbles: true }));
     }
     var sel = frm.querySelector('[name="tipo_servicio"]');
@@ -170,6 +183,12 @@
   if (applyBtn) applyBtn.addEventListener('click', function (e) {
     e.preventDefault();
     applyToForm();
+  });
+
+  var waBtn = document.getElementById('wiz-wa');
+  if (waBtn) waBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.open('https://wa.me/5493875151179?text=' + encodeURIComponent(waMessage()), '_blank', 'noopener');
   });
 
   /* Tab buttons (data-step) navigate freely */

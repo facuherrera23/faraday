@@ -145,4 +145,19 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://faraday-energy-landing.vercel.app/en/privacy.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://faraday-energy-landing.vercel.app/pages/privacidad.html"/>
   </url>
+  <url>
+    <loc>https://faraday-energy-landing.vercel.app/pages/blog-energia-solar.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://faraday-energy-landing.vercel.app/pages/blog-respaldo-energia.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://faraday-energy-landing.vercel.app/pages/blog-mantenimiento-electrico.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <priority>0.5</priority>
+  </url>
 </urlset>

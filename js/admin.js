@@ -162,10 +162,14 @@
     var today = new Date().toDateString();
     var nuevas = leadsCache.filter(function (l) { return l.estado === 'nuevo'; }).length;
     var hoy = leadsCache.filter(function (l) { return new Date(l.created_at).toDateString() === today; }).length;
+    var cont = function (st) { return leadsCache.filter(function (l) { return l.estado === st; }).length; };
 
     $('stat-total').textContent = leadsCache.length;
     $('stat-nuevos').textContent = nuevas;
     $('stat-hoy').textContent = hoy;
+    $('stat-leidos').textContent = cont('leido');
+    $('stat-contactados').textContent = cont('contactado');
+    $('stat-cerrados').textContent = cont('cerrado');
     $('badge-leads').textContent = leadsCache.length;
 
     var list = $('leads-list');

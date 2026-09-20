@@ -246,15 +246,15 @@
   </section>
   <section class="section" style="background:var(--gray-700)">
     <div class="container">
-      <div class="reveal" style="margin-bottom:2.5rem">
+      <div class="reveal" id="testimonios-block" style="margin-bottom:2.5rem;display:none">
         <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.5rem">
           <div style="width:32px;height:2px;background:var(--gold)"></div>
           <span style="font-family:var(--font-mono);font-size:0.55rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.2em">02 / LO QUE DICEN</span>
         </div>
         <h2 class="display tight" style="font-size:var(--type-h3);text-transform:uppercase;margin-top:0.5rem">TESTIMONIOS <span style="color:var(--gold)">DE CLIENTES</span></h2>
-        <p class="mono" style="font-size:0.6rem;color:var(--gray-400);line-height:1.7;text-transform:uppercase;letter-spacing:0.08em;margin-top:1rem">Completa esta seccion con los testimonios reales que te pasen los clientes. Sustituye los placeholders.</p>
+        
       </div>
-      <div class="reveal reveal-d1" id="testimonios-grid" style="display:grid;gap:1px;background:var(--gray-500)">
+      <div class="reveal reveal-d1" id="testimonios-grid" style="display:none;gap:1px;background:var(--gray-500)">
         <div style="background:var(--black);padding:clamp(1.5rem,3vw,2.5rem);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,2fr);gap:1.5rem;align-items:start">
           <div>
             <div style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);line-height:0.85;color:var(--gray-500);opacity:0.6">"</div>
@@ -282,6 +282,43 @@
       </div>
     </div>
   </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict';
+  if (!window.SUPABASE_READY || !SUPABASE_READY()) return;
+  var c = window.SUPABASE_CONFIG;
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch];
+    });
+  }
+  fetch(c.url + '/rest/v1/testimonios?select=nombre,empresa,texto&aprobado=eq.true&order=created_at.desc&limit=9', {
+    headers: { 'apikey': c.anonKey, 'Authorization': 'Bearer ' + c.anonKey }
+  }).then(function (r) {
+    if (!r.ok) return;
+    r.json().then(function (rows) {
+      if (!rows || !rows.length) return;
+      var grid = document.getElementById('testimonios-grid');
+      var block = document.getElementById('testimonios-block');
+      if (!grid || !block) return;
+      var html = '';
+      rows.forEach(function (t) {
+        html += '<div style="background:var(--black);padding:clamp(1.5rem,3vw,2.5rem);display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,2fr);gap:1.5rem;align-items:start">' +
+          '<div>' +
+          '<div style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2rem);line-height:0.85;color:var(--gray-500);opacity:0.6">"</div>' +
+          '<div style="font-family:var(--font-mono);font-size:0.55rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-top:0.5rem">' + esc(t.nombre) + '</div>' +
+          (t.empresa ? '<div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--gray-400);text-transform:uppercase;letter-spacing:0.08em;margin-top:0.2rem">' + esc(t.empresa) + '</div>' : '') +
+          '</div>' +
+          '<p class="mono" style="font-size:0.7rem;color:var(--gray-200);line-height:1.8">' + esc(t.texto) + '</p>' +
+          '</div>';
+      });
+      grid.innerHTML = html;
+      block.style.display = 'block';
+      grid.style.display = 'grid';
+    });
+  }).catch(function () {});
+})();
+</script>
 </main>
 <footer class="footer">
   <div class="container">
@@ -354,7 +391,8 @@
     });
   })();
   </script>
-<script src="../js/main.js"></script>
+<script src="../js/supabase-config.js"></script>
+  <script src="../js/main.js"></script>
   <script src="../js/nav.js"></script>
   <script src="../js/reveal.js"></script>
 <div class="sticky-cta"><a href="contacto.html" class="sticky-cta__link">PEDI TU PRESUPUESTO -&gt; RESPUESTA EN 24HS</a></div>

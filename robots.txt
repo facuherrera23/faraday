@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://faradayenergy.com.ar/sitemap.xml
+Sitemap: https://faraday-energy-landing.vercel.app/sitemap.xml

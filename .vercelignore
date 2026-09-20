@@ -1,0 +1,98 @@
+# ══════════════════════════════════════════════════════════════════════
+# EXCLUIDOS DEL DEPLOY — Vercel CLI NO respeta .gitignore, solo este archivo.
+# Sin él, deploys previos publicaron .pwa-signing/ (keystore + claves) en la URL
+# de producción. Mantener esta lista al día antes de cada `npx vercel --prod`.
+# ══════════════════════════════════════════════════════════════════════
+
+# SECRETOS — jamás deployar
+.pwa-signing/
+
+# Tooling de agentes local (untracked)
+.adal/
+.agents/
+.aider-desk/
+.augment/
+.autohand/
+.bob/
+.claude/
+.codeartsdoer/
+.codebuddy/
+.codegraph/
+.codemaker/
+.codestudio/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.devin/
+.factory/
+.forge/
+.git/
+.github/
+.goose/
+.grok/
+.hermes/
+.iflow/
+.inferencesh/
+.jazz/
+.junie/
+.kilocode/
+.kimchi/
+.kiro/
+.kode/
+.lingma/
+.mcpjam/
+.minimax/
+.moxby/
+.mux/
+.neovate/
+.omo/
+.ona/
+.openhands/
+.pi/
+.playwright-mcp/
+.pochi/
+.posit/
+.qoder/
+.qwen/
+.reasonix/
+.roo/
+.rovodev/
+.tabnine/
+.terramind/
+.tinycloud/
+.trae/
+.vibe/
+.windsurf/
+.zcode/
+.zencoder/
+agent/
+data/
+skills/
+omo/
+
+# Scripts one-shot de migración/auditoría (prefijo _ = tooling local, nunca sitio)
+_*.py
+__pycache__/
+
+# Artefactos dev / docs locales / capturas
+COTIZACION.md
+survey.txt
+AGENTS.md
+skills-lock.json
+lighthouserc.json
+screenshots/
+vis-audit/
+vis-audit2/
+admin-demo-final.png
+admin-demo.png
+admin-detail-pdf.png
+admin-features.png
+admin-sla.png
+cotizador.png
+hero-desktop.png
+hero-final.png
+hero-fixed.png
+
+# Config local de Vercel CLI
+.vercel/

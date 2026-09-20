@@ -19,11 +19,13 @@
 <nav class="nav" role="navigation" aria-label="Principal">
   <div class="nav__strip">
     <span>EST. 2018 / SALTA, ARGENTINA</span>
+    
     <span class="nav__strip-mid">ENERGIA / INDUSTRIA / INGENIERIA</span>
     <div class="nav__strip-contacts">
       <a href="tel:+543875151179" class="nav__strip-link">+54 387 515 1179</a>
       <span class="nav__strip-sep">/</span>
       <a href="mailto:faradayenergycfc@gmail.com" class="nav__strip-link">faradayenergycfc@gmail.com</a>
+      <a href="../en/index.html" class="nav__strip-link" lang="en" hreflang="en">EN</a>
     </div>
   </div>
   <div class="nav__bar">
@@ -31,9 +33,31 @@
     <ul class="nav__links">
       <li><a href="../index.html" class="nav__link"><span class="nav__num">01</span> INICIO</a></li>
       <li><a href="quienes-somos.html" class="nav__link"><span class="nav__num">02</span> QUIENES</a></li>
-      <li><a href="servicios.html" class="nav__link"><span class="nav__num">03</span> SERVICIOS</a></li>
-      <li><a href="clientes.html" class="nav__link"><span class="nav__num">04</span> CLIENTES</a></li>
-      <li><a href="casos-exito.html" class="nav__link"><span class="nav__num">05</span> CASOS</a></li><li><a href="blog.html" class="nav__link"><span class="nav__num">06</span> BLOG</a></li><li><a href="contacto.html" class="nav__link"><span class="nav__num">07</span> CONTACTO</a></li>
+      <li class="nav__item nav__item--has-drop">
+        <button type="button" class="nav__link nav__link--button" id="nav-services-btn" aria-expanded="false" aria-controls="nav-dropdown"><span class="nav__num">03</span> SERVICIOS <span class="nav__caret" aria-hidden="true">+</span></button>
+        <div class="nav__drop" id="nav-dropdown">
+          <div class="nav__drop-inner">
+            <div class="nav__drop-head">
+              <span class="nav__drop-kicker">03 / SERVICIOS</span>
+              <span class="nav__drop-title">SOLUCIONES INTEGRALES</span>
+            </div>
+            <div class="nav__drop-grid">
+              <a href="servicio-asesoramiento.html" class="nav__drop-link"><span class="nav__drop-num">01</span> ASESORAMIENTO ENERGETICO</a>
+              <a href="servicio-obras-electricas.html" class="nav__drop-link"><span class="nav__drop-num">02</span> OBRAS ELECTRICAS</a>
+              <a href="servicio-mantenimiento.html" class="nav__drop-link"><span class="nav__drop-num">03</span> MANTENIMIENTO PREVENTIVO</a>
+              <a href="servicio-energia-solar.html" class="nav__drop-link"><span class="nav__drop-num">04</span> ENERGIA SOLAR</a>
+              <a href="servicio-respaldo-energia.html" class="nav__drop-link"><span class="nav__drop-num">05</span> RESPALDO DE ENERGIA</a>
+              <a href="servicio-climatizacion.html" class="nav__drop-link"><span class="nav__drop-num">06</span> CLIMATIZACION CONFORT TERMICO</a>
+              <a href="servicio-obra-civil.html" class="nav__drop-link"><span class="nav__drop-num">07</span> OBRA CIVIL</a>
+              <a href="servicio-llave-en-mano.html" class="nav__drop-link"><span class="nav__drop-num">08</span> SOLUCIONES LLAVE EN MANO</a>
+              <a href="servicio-tecnologia.html" class="nav__drop-link"><span class="nav__drop-num">09</span> TECNOLOGIA INTEGRAL</a>
+              <a href="servicio-seguridad-fisica.html" class="nav__drop-link"><span class="nav__drop-num">10</span> SEGURIDAD FISICA</a>
+            </div>
+            <a href="servicios.html" class="nav__drop-all">VER TODOS LOS SERVICIOS</a>
+          </div>
+        </div>
+      </li>
+      <li><a href="clientes.html" class="nav__link"><span class="nav__num">04</span> CLIENTES</a></li><li><a href="casos-exito.html" class="nav__link"><span class="nav__num">05</span> CASOS</a></li><li><a href="blog.html" class="nav__link"><span class="nav__num">06</span> BLOG</a></li><li><a href="contacto.html" class="nav__link"><span class="nav__num">07</span> CONTACTO</a></li>
     </ul>
     <a href="contacto.html" class="btn nav__cta">HABLEMOS</a>
     <button type="button" class="nav__toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-mobile"><span class="nav__burger" aria-hidden="true"></span></button>
@@ -47,9 +71,22 @@
   <div class="nav__mobile-links">
     <a href="../index.html" class="nav__m-link"><span class="nav__num">01</span> INICIO</a>
     <a href="quienes-somos.html" class="nav__m-link"><span class="nav__num">02</span> QUIENES</a>
-    <a href="servicios.html" class="nav__m-link"><span class="nav__num">03</span> SERVICIOS</a>
-    <a href="clientes.html" class="nav__m-link"><span class="nav__num">04</span> CLIENTES</a>
-    <a href="casos-exito.html" class="nav__m-link"><span class="nav__num">05</span> CASOS</a><a href="blog.html" class="nav__m-link"><span class="nav__num">06</span> BLOG</a><a href="contacto.html" class="nav__m-link"><span class="nav__num">07</span> CONTACTO</a>
+    <button type="button" class="nav__m-link nav__m-link--btn" aria-expanded="false" aria-controls="nav-m-acc"><span class="nav__num">03</span> SERVICIOS <span class="nav__caret" aria-hidden="true">+</span></button>
+    <div class="nav__m-acc" id="nav-m-acc">
+      <div class="nav__m-acc-inner">
+        <a href="servicio-asesoramiento.html" class="nav__m-sub"><span class="nav__drop-num">01</span> ASESORAMIENTO ENERGETICO</a>
+        <a href="servicio-obras-electricas.html" class="nav__m-sub"><span class="nav__drop-num">02</span> OBRAS ELECTRICAS</a>
+        <a href="servicio-mantenimiento.html" class="nav__m-sub"><span class="nav__drop-num">03</span> MANTENIMIENTO PREVENTIVO</a>
+        <a href="servicio-energia-solar.html" class="nav__m-sub"><span class="nav__drop-num">04</span> ENERGIA SOLAR</a>
+        <a href="servicio-respaldo-energia.html" class="nav__m-sub"><span class="nav__drop-num">05</span> RESPALDO DE ENERGIA</a>
+        <a href="servicio-climatizacion.html" class="nav__m-sub"><span class="nav__drop-num">06</span> CLIMATIZACION CONFORT TERMICO</a>
+        <a href="servicio-obra-civil.html" class="nav__m-sub"><span class="nav__drop-num">07</span> OBRA CIVIL</a>
+        <a href="servicio-llave-en-mano.html" class="nav__m-sub"><span class="nav__drop-num">08</span> SOLUCIONES LLAVE EN MANO</a>
+        <a href="servicio-tecnologia.html" class="nav__m-sub"><span class="nav__drop-num">09</span> TECNOLOGIA INTEGRAL</a>
+        <a href="servicio-seguridad-fisica.html" class="nav__m-sub"><span class="nav__drop-num">10</span> SEGURIDAD FISICA</a>
+      </div>
+    </div>
+    <a href="clientes.html" class="nav__m-link"><span class="nav__num">04</span> CLIENTES</a><a href="casos-exito.html" class="nav__m-link"><span class="nav__num">05</span> CASOS</a><a href="blog.html" class="nav__m-link"><span class="nav__num">06</span> BLOG</a><a href="contacto.html" class="nav__m-link"><span class="nav__num">07</span> CONTACTO</a>
   </div>
   <div class="nav__mobile-foot">
     <a href="tel:+543875151179" class="nav__m-tel">+54 387 515 1179</a>
@@ -59,7 +96,7 @@
   </div>
 </div>
 
-<main id="main">
+  <main id="main">
   <section style="min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;padding-top:calc(var(--nav-height) + clamp(2rem,5vw,4rem));position:relative;overflow:hidden;background:var(--black);padding-bottom:clamp(2rem,5vw,4rem)">
     <div style="position:absolute;inset:0;z-index:1;opacity:0.06;pointer-events:none;background-image:linear-gradient(var(--gray-500) 1px, transparent 1px),linear-gradient(90deg, var(--gray-500) 1px, transparent 1px);background-size:80px 80px"></div>
     <div style="position:absolute;inset:0;z-index:1;opacity:0.03;pointer-events:none;background-image:linear-gradient(var(--gold) 1px, transparent 1px),linear-gradient(90deg, var(--gold) 1px, transparent 1px);background-size:400px 400px"></div>

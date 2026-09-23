@@ -13,20 +13,24 @@
 
   var renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
   } catch (e) { return; }
-  renderer.setClearColor(0x000000, 1);
+  renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.25;
+  renderer.toneMappingExposure = 1.1;
   container.appendChild(renderer.domElement);
 
   var composer = new THREE.EffectComposer(renderer);
   composer.addPass(new THREE.RenderPass(scene, camera));
-  var bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(2, 2), 2.0, 0.4, 0.1);
+  var bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(2, 2), 1.3, 0.4, 0.15);
   composer.addPass(bloomPass);
 
   var masterGroup = new THREE.Group();
+  if (container.dataset.mobile !== 'true') {
+    masterGroup.position.set(7.5, 0.8, -4);
+    masterGroup.scale.set(0.62, 0.62, 0.62);
+  }
   scene.add(masterGroup);
 
   var shape = new THREE.Shape();
@@ -44,7 +48,7 @@
   var rayoMat = new THREE.MeshPhysicalMaterial({
     color: 0xffa500,
     emissive: 0xff8c00,
-    emissiveIntensity: 0.7,
+    emissiveIntensity: 0.45,
     metalness: 0.85,
     roughness: 0.15,
     clearcoat: 1.0,
@@ -53,7 +57,7 @@
   });
   masterGroup.add(new THREE.Mesh(rayoGeo, rayoMat));
 
-  var rayoWireMesh = new THREE.Mesh(rayoGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.35 }));
+  var rayoWireMesh = new THREE.Mesh(rayoGeo, new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.22 }));
   rayoWireMesh.scale.set(1.03, 1.03, 1.03);
   masterGroup.add(rayoWireMesh);
 
@@ -62,7 +66,7 @@
     var pts = [];
     for (var k = 0; k < 13; k++) pts.push(new THREE.Vector3(0, 0, 0));
     var g = new THREE.BufferGeometry().setFromPoints(pts);
-    masterGroup.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: a % 2 === 0 ? 0x00ffff : 0xffd700, transparent: true, opacity: 0.9 })));
+    masterGroup.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: a % 2 === 0 ? 0x00ffff : 0xffd700, transparent: true, opacity: 0.55 })));
     arcLines.push(g);
   }
 
@@ -134,8 +138,8 @@
       masterGroup.rotation.x = Math.sin(t * 0.5) * 0.15 - currentMouseY * 0.6;
     }
     var pulse = Math.sin(t * 8) * 0.3 + 1.2;
-    rayoMat.emissiveIntensity = 0.5 * pulse;
-    coreLight.intensity = 4 * pulse;
+    rayoMat.emissiveIntensity = 0.35 * pulse;
+    coreLight.intensity = 2.6 * pulse;
     if (Math.random() > 0.3) updateArcs();
     composer.render();
   }

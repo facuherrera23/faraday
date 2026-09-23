@@ -1,5 +1,5 @@
 /* FARADAY ENERGY - Service Worker */
-var VERSION = 'v20';
+var VERSION = 'v21';
 var CACHE_PRE = 'faraday-precache-' + VERSION;
 var CACHE_RUNTIME = 'faraday-runtime-' + VERSION;
 var CACHES = [CACHE_PRE, CACHE_RUNTIME];

@@ -11,7 +11,7 @@
   var key = media.getAttribute('data-hero-key');
   if (!key) return;
 
-  var GRAD = 'linear-gradient(180deg, rgba(17,17,16,0.66) 0%, rgba(17,17,16,0.9) 100%)';
+  var GRAD = 'linear-gradient(180deg, rgba(17,17,16,0.55) 0%, rgba(17,17,16,0.85) 100%)';
   var c = window.SUPABASE_CONFIG;
 
   fetch(c.url + '/rest/v1/hero_images?select=image_url&key=eq.' + encodeURIComponent(key) + '&limit=1', {

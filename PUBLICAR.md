@@ -60,6 +60,10 @@ Opcion B: edita `js/supabase-config.js` y reemplaza `SUPABASE_URL_AQUI` y `SUPAB
 Con eso reviven solos: panel admin con leads reales (reemplaza el MODO DEMO),
 guardado en base de datos, contador de leads en tiempo real.
 
+Tambien revive la pestana IMAGENES del panel: subi una foto para cualquier
+pagina (inicio, cada servicio, contacto...) y reemplaza su imagen default
+de portada al instante. El SQL del bucket ya viene en setup.sql.
+
 ### 1e. Edge Functions (para notificaciones y auto-reply)
 - Edge Functions > New function -> `send-push` -> pegar `supabase/functions/send-push/index.ts` -> Deploy
 - Secrets de la funcion (pestaña Secrets), los valores estan en `.pwa-signing/vapid-keys.txt`:

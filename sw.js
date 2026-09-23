@@ -1,5 +1,5 @@
 /* FARADAY ENERGY - Service Worker */
-var VERSION = 'v19';
+var VERSION = 'v20';
 var CACHE_PRE = 'faraday-precache-' + VERSION;
 var CACHE_RUNTIME = 'faraday-runtime-' + VERSION;
 var CACHES = [CACHE_PRE, CACHE_RUNTIME];
@@ -20,7 +20,7 @@ var PRE_CACHE = [
   '/pages/servicio-obras-electricas.html', '/pages/servicio-respaldo-energia.html',
   '/pages/servicio-seguridad-fisica.html', '/pages/servicio-tecnologia.html',
   '/css/tokens.css', '/css/base.css', '/css/layout.css', '/css/components.css', '/css/motion.css',
-  '/js/main.js', '/js/reveal.js', '/js/nav.js', '/js/supabase-config.js', '/js/quote-wizard.js',
+  '/js/main.js', '/js/hero-image.js', '/js/reveal.js', '/js/nav.js', '/js/supabase-config.js', '/js/quote-wizard.js',
   '/js/analytics.js', '/js/sentry-init.js', '/js/push.js', '/js/admin.js', '/js/hero-lightning.js',
   '/assets/img/favicon.png', '/assets/img/icon-192.png', '/assets/img/icon-512.png'
 ];

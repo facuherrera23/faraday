@@ -181,7 +181,9 @@
 
 <div style="border-top:1px solid var(--gray-500)"></div><main id="main">
 
-  <section style="min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-height);position:relative;background:var(--black);overflow:visible">
+  <section style="min-height:100dvh;display:grid;grid-template-columns:1fr 1fr;padding-top:var(--nav-height);position:relative;background:var(--black);overflow:visiblez-index:0;">
+    <div data-hero-key="index.html" aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg, rgba(17,17,16,0.66) 0%, rgba(17,17,16,0.9) 100%), url('../assets/img/hero/hero-index.svg') center/cover no-repeat"></div>
+    
     <div id="hero-bolt" aria-hidden="true" style="position:absolute;top:0;left:0;bottom:0;width:50%;z-index:1;pointer-events:none"></div>
     <div style="position:absolute;inset:0;z-index:1;opacity:0.06;pointer-events:none;background-image:linear-gradient(var(--gray-500) 1px, transparent 1px),linear-gradient(90deg, var(--gray-500) 1px, transparent 1px);background-size:80px 80px"></div>
     <div style="position:absolute;inset:0;z-index:1;opacity:0.03;pointer-events:none;background-image:linear-gradient(var(--gold) 1px, transparent 1px),linear-gradient(90deg, var(--gold) 1px, transparent 1px);background-size:400px 400px"></div>
@@ -607,6 +609,8 @@
 <div class="sticky-cta"><a href="contacto.html" class="sticky-cta__link">GET A QUOTE -&gt; WE REPLY WITHIN 24H</a></div>
 <script src="../js/main.js"></script>
 <script src="../js/nav.js"></script>
-<script src="../js/reveal.js"></script>
+<script src="../js/supabase-config.js"></script>
+  <script src="../js/hero-image.js"></script>
+  <script src="../js/reveal.js"></script>
 </body>
 </html>

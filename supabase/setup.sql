@@ -227,3 +227,53 @@ CREATE POLICY ps_self_all
 
 -- Las Edge Functions leen todas las suscripciones con service_role
 -- (bypasea RLS); no hacen falta mas politicas.
+
+-- ===== 9. IMAGENES DE PORTADA (gestionadas desde el admin) =====
+
+CREATE TABLE IF NOT EXISTS public.hero_images (
+  key         text PRIMARY KEY,
+  image_url   text NOT NULL,
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+
+ALTER TABLE public.hero_images ENABLE ROW LEVEL SECURITY;
+
+-- Cualquiera puede leer: las paginas publicas necesitan ver que imagen usar.
+DROP POLICY IF EXISTS hi_select_public ON public.hero_images;
+CREATE POLICY hi_select_public
+  ON public.hero_images
+  FOR SELECT
+  TO anon, authenticated
+  USING (true);
+
+-- Solo admins escriben.
+DROP POLICY IF EXISTS hi_staff_all ON public.hero_images;
+CREATE POLICY hi_staff_all
+  ON public.hero_images
+  FOR ALL
+  TO authenticated
+  USING (public.current_user_role() IN ('admin','super_admin'))
+  WITH CHECK (public.current_user_role() IN ('admin','super_admin'));
+
+-- Bucket de Storage para las imagenes (publico de lectura).
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('hero', 'hero', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Lectura publica de los archivos del bucket.
+DROP POLICY IF EXISTS hero_read_public ON storage.objects;
+CREATE POLICY hero_read_public
+  ON storage.objects
+  FOR SELECT
+  TO anon, authenticated
+  USING (bucket_id = 'hero');
+
+-- Solo admins suben/borran en el bucket.
+DROP POLICY IF EXISTS hero_staff_write ON storage.objects;
+CREATE POLICY hero_staff_write
+  ON storage.objects
+  FOR ALL
+  TO authenticated
+  USING (bucket_id = 'hero' AND public.current_user_role() IN ('admin','super_admin'))
+  WITH CHECK (bucket_id = 'hero' AND public.current_user_role() IN ('admin','super_admin'));
+

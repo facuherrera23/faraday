@@ -116,7 +116,9 @@
 </div>
 
   <main id="main">
-  <section class="section" style="padding-top:calc(var(--nav-height) + clamp(2rem,5vw,4rem));background:var(--black)">
+  <section class="section" style="padding-top:calc(var(--nav-height) + clamp(2rem,5vw,4rem));background:var(--black)position:relative;z-index:0;">
+    <div data-hero-key="pages/clientes.html" aria-hidden="true" style="position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg, rgba(17,17,16,0.66) 0%, rgba(17,17,16,0.9) 100%), url('../assets/img/hero/hero-clientes.svg') center/cover no-repeat"></div>
+    
     <div class="container">
       <div class="reveal">
         <span class="tag tag--gold" style="margin-bottom:1rem;display:inline-flex">03 <span style="color:var(--gray-400)">/ CLIENTES</span></span>
@@ -396,6 +398,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <script src="../js/supabase-config.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/nav.js"></script>
+  <script src="../js/hero-image.js"></script>
   <script src="../js/reveal.js"></script>
 <div class="sticky-cta"><a href="contacto.html" class="sticky-cta__link">PEDI TU PRESUPUESTO -&gt; RESPUESTA EN 24HS</a></div>
 </body>

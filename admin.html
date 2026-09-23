@@ -119,7 +119,7 @@
   </div>
   <div class="admin-tabs">
     <button class="admin-tab active" data-view="leads">CONSULTAS <span id="badge-leads" style="color:var(--gold)">0</span></button>
-    <button class="admin-tab" data-view="kanban">KANBAN</button><button class="admin-tab" data-view="testimonios">TESTIMONIOS <span id="badge-testimonios" style="color:var(--gold)">0</span></button><button class="admin-tab" data-view="equipo" id="tab-equipo" style="display:none">EQUIPO <span id="badge-equipo" style="color:var(--gold)">0</span></button>
+    <button class="admin-tab" data-view="kanban">KANBAN</button><button class="admin-tab" data-view="imagenes">IMAGENES</button><button class="admin-tab" data-view="testimonios">TESTIMONIOS <span id="badge-testimonios" style="color:var(--gold)">0</span></button><button class="admin-tab" data-view="equipo" id="tab-equipo" style="display:none">EQUIPO <span id="badge-equipo" style="color:var(--gold)">0</span></button>
   </div>
 
   <div class="admin-view active" data-view="leads">
@@ -180,7 +180,17 @@
       </div>
     </div>
   </div>
-  <div class="admin-view" data-view="testimonios">
+  <div <div class="admin-view" data-view="imagenes">
+    <div style="border:1px solid var(--gray-500);background:var(--gray-700);padding:1rem;margin-bottom:1rem">
+      <p class="mono" style="font-size:0.6rem;color:var(--gray-200);text-transform:uppercase;letter-spacing:0.1em;line-height:1.6;margin:0">
+        Imagenes de portada por pagina. Si no subis ninguna, cada pagina usa su imagen default.
+        Formato recomendado: JPG/PNG horizontal (1600x900 o similar), menos de 2MB.
+        <span id="hero-mgr-mode" style="color:var(--gold)"></span>
+      </p>
+    </div>
+    <div id="hero-mgr" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0.75rem"></div>
+  </div>
+  class="admin-view" data-view="testimonios">
     <h3 style="font-family:var(--font-display);font-size:1.1rem;text-transform:uppercase;color:var(--white);margin-bottom:1rem">Testimonios de clientes</h3>
     <div id="testimoniales-info" style="padding:1rem;background:var(--gray-700);border:1px solid var(--gray-500);margin-bottom:1.5rem;font-family:var(--font-mono);font-size:0.6rem;color:var(--gray-300);text-transform:uppercase;letter-spacing:0.08em;line-height:1.7">
       Llena testimonios con los datos reales que te pasen los clientes ya y aproba para que se publiquen en la pagina Clientes. Solo los aprobados se ven.

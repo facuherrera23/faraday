@@ -589,6 +589,7 @@
       if (tab.dataset.view === 'equipo') loadTeam();
       if (tab.dataset.view === 'kanban') renderKanban();
       if (tab.dataset.view === 'testimonios') loadTestimonios();
+      if (tab.dataset.view === 'imagenes') loadHeroImages();
     });
   });
 
@@ -691,10 +692,132 @@
       var right = topbar.querySelector('div');
       if (right) right.insertBefore(btn, right.firstChild);
     }
-    btn.addEventListener('click', function () {
-      btn.remove();
-      installPrompt.prompt();
-      installPrompt.userChoice.then(function () { installPrompt = null; });
+      btn.addEventListener('click', function () {
+        btn.remove();
+        installPrompt.prompt();
+        installPrompt.userChoice.then(function () { installPrompt = null; });
+      });
     });
-  });
-})();
+
+    /* ================= IMAGENES DE PORTADA ================= */
+
+    var HERO_PAGES = [
+      ['index.html', 'Inicio'],
+      ['404.html', 'Error 404'],
+      ['pages/quienes-somos.html', 'Quienes Somos'],
+      ['pages/servicios.html', 'Servicios'],
+      ['pages/clientes.html', 'Clientes'],
+      ['pages/casos-exito.html', 'Casos de Exito'],
+      ['pages/blog.html', 'Blog'],
+      ['pages/contacto.html', 'Contacto'],
+      ['pages/gracias.html', 'Gracias'],
+      ['pages/privacidad.html', 'Privacidad'],
+      ['pages/terminos.html', 'Terminos'],
+      ['pages/servicio-asesoramiento.html', 'Asesoramiento Energetico'],
+      ['pages/servicio-obras-electricas.html', 'Obras Electricas'],
+      ['pages/servicio-mantenimiento.html', 'Mantenimiento Preventivo'],
+      ['pages/servicio-energia-solar.html', 'Energia Solar'],
+      ['pages/servicio-respaldo-energia.html', 'Respaldo de Energia'],
+      ['pages/servicio-climatizacion.html', 'Climatizacion'],
+      ['pages/servicio-obra-civil.html', 'Obra Civil'],
+      ['pages/servicio-llave-en-mano.html', 'Llave en Mano'],
+      ['pages/servicio-tecnologia.html', 'Tecnologia Integral'],
+      ['pages/servicio-seguridad-fisica.html', 'Seguridad Fisica'],
+      ['pages/blog-energia-solar.html', 'Blog: Energia Solar'],
+      ['pages/blog-respaldo-energia.html', 'Blog: Respaldo'],
+      ['pages/blog-mantenimiento-electrico.html', 'Blog: Mantenimiento'],
+      ['pages/blog-climatizacion.html', 'Blog: Climatizacion'],
+      ['pages/blog-seguridad-fisica.html', 'Blog: Seguridad']
+    ];
+
+    function loadHeroImages() {
+      var mgr = document.getElementById('hero-mgr');
+      var modeEl = document.getElementById('hero-mgr-mode');
+      if (!mgr) return;
+      if (modeEl) modeEl.textContent = DEMO ? ' [MODO DEMO: conecta Supabase para subir imagenes reales]' : '';
+
+      var overrides = {};
+      function render() {
+        mgr.innerHTML = '';
+        HERO_PAGES.forEach(function (pg) {
+          var key = pg[0], label = pg[1], url = overrides[key];
+          var card = document.createElement('div');
+          card.style.cssText = 'border:1px solid var(--gray-500);background:var(--black);padding:0.75rem;display:flex;flex-direction:column;gap:0.5rem';
+          var thumb = document.createElement('div');
+          thumb.style.cssText = 'height:110px;background:var(--gray-700);background-size:cover;background-position:center;border:1px solid var(--gray-600)';
+          if (url) { thumb.style.backgroundImage = 'url("' + url + '")'; }
+          var name = document.createElement('div');
+          name.className = 'mono';
+          name.style.cssText = 'font-size:0.55rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)';
+          name.textContent = label + (url ? ' — PERSONALIZADA' : ' — DEFAULT');
+          var row = document.createElement('div');
+          row.style.cssText = 'display:flex;gap:0.5rem;align-items:center';
+          var file = document.createElement('input');
+          file.type = 'file';
+          file.accept = 'image/png,image/jpeg,image/webp';
+          file.style.cssText = 'flex:1;font-size:0.6rem;max-width:180px;color:var(--gray-300)';
+          if (DEMO) file.disabled = true;
+          file.addEventListener('change', function () {
+            if (!file.files || !file.files[0]) return;
+            uploadHero(key, file.files[0], function (err) {
+              if (err) { alert('ERROR: ' + err); return; }
+              loadHeroImages();
+            });
+          });
+          row.appendChild(file);
+          if (url) {
+            var del = document.createElement('button');
+            del.type = 'button';
+            del.className = 'btn-estado';
+            del.style.cssText = 'font-size:0.55rem;padding:0.35rem 0.6rem';
+            del.textContent = 'QUITAR';
+            if (DEMO) del.disabled = true;
+            del.addEventListener('click', function () {
+              deleteHero(key, function (err) {
+                if (err) { alert('ERROR: ' + err); return; }
+                loadHeroImages();
+              });
+            });
+            row.appendChild(del);
+          }
+          card.appendChild(thumb);
+          card.appendChild(name);
+          card.appendChild(row);
+          mgr.appendChild(card);
+        });
+      }
+
+      if (DEMO) { overrides = {}; render(); return; }
+      db.from('hero_images').select('key,image_url').then(function (r) {
+        if (!r.error && r.data) {
+          r.data.forEach(function (row) { overrides[row.key] = row.image_url; });
+        }
+        render();
+      });
+    }
+
+    function uploadHero(key, file, cb) {
+      if (DEMO) { cb('MODO DEMO: no se puede subir. Conecta Supabase (ver PUBLICAR.md).'); return; }
+      if (file.size > 2 * 1024 * 1024) { cb('Imagen mayor a 2MB. Comprimila antes de subir.'); return; }
+      var ext = file.name.split('.').pop().toLowerCase();
+      var path = 'heroes/' + key.replace(/[^a-z0-9-]/g, '_') + '.' + ext;
+      db.storage.from('hero').upload(path, file, { upsert: true }).then(function (r) {
+        if (r.error) { cb(r.error.message); return; }
+        var pub = db.storage.from('hero').getPublicUrl(path);
+        var url = pub && pub.data ? pub.data.publicUrl : null;
+        if (!url) { cb('No se obtuvo la URL publica'); return; }
+        db.from('hero_images').upsert({ key: key, image_url: url, updated_at: new Date().toISOString() }).then(function (r2) {
+          if (r2.error) { cb(r2.error.message); return; }
+          cb(null);
+        });
+      });
+    }
+
+    function deleteHero(key, cb) {
+      if (DEMO) { cb('MODO DEMO'); return; }
+      db.from('hero_images').delete().eq('key', key).then(function (r) {
+        if (r.error) { cb(r.error.message); return; }
+        cb(null);
+      });
+    }
+  })();

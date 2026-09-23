@@ -81,3 +81,6 @@ supabase/.temp/
 
 # Lighthouse CI artifacts
 .lighthouseci/
+
+# Capturas de verificacion local
+hero-check/
